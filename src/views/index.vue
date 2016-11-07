@@ -1,5 +1,5 @@
 <template>
-    <div class="message">1ha2h {{message}} <input type="text" v-model="message"></div>
+    <div class="message">1ha222h {{message}} <input type="text" v-model="message"></div>
 
 </template>
 
