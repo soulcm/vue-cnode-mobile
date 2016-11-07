@@ -7,6 +7,7 @@ var port = 3000;
 //启动服务
 var server = new WebpackDevServer(webpack(config), {
     publicPath: 'http://127.0.0.1:3000/dist/',
+    // contentBase: path.resolve(__dirname),
     hot: true,
     noInfo: true,
     stats: {
