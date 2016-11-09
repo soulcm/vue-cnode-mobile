@@ -2,7 +2,8 @@
     <div>
         <nv-head></nv-head>
 
-        <topic-list></topic-list>
+        <router-view></router-view>
+
 
     </div>
 
@@ -25,8 +26,7 @@
         },
 
         components: {
-            nvHead,
-            topicList
+            nvHead
         }
     };
 </script>

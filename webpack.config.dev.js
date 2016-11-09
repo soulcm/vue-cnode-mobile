@@ -6,7 +6,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 // add hot-reload related code to entry chunks
 Object.keys(baseWebpackConfig.entry).forEach(function (name) {
-    baseWebpackConfig.entry[name] = ['webpack-dev-server/client?http://127.0.0.1:3000', 'webpack/hot/dev-server'].concat(baseWebpackConfig.entry[name]);
+    baseWebpackConfig.entry[name] = ['webpack-dev-server/client?http://127.0.0.1:8091', 'webpack/hot/dev-server'].concat(baseWebpackConfig.entry[name]);
 })
 
 baseWebpackConfig.plugins.push(
