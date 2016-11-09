@@ -2,12 +2,11 @@ var path = require('path');
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 var config = require('./webpack.config.dev.js');
-var port = 3000;
+var port = 8091;
 
 //启动服务
 var server = new WebpackDevServer(webpack(config), {
-    publicPath: '/',
-    // contentBase: path.resolve(__dirname),
+    publicPath: '/dist/',
     hot: true,
     noInfo: true,
     stats: {

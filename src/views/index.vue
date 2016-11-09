@@ -1,22 +1,32 @@
 <template>
-    <div class="message">1ha222h {{message}} <input type="text" v-model="message"></div>
+    <div>
+        <nv-head></nv-head>
+
+        <topic-list></topic-list>
+
+    </div>
+
 
 </template>
 
+<style>
+
+</style>
+
 <script>
+    import nvHead from '../components/header';
+    import topicList from '../components/topicList';
+
     export default {
         data() {
             return {
                 message: 22332
             }
+        },
+
+        components: {
+            nvHead,
+            topicList
         }
     };
 </script>
-<style>
-    body{background: #ccc}
-    .message{
-        color:red;
-        font-size:36px;
-        font-weight:blod;
-    }
-</style>
