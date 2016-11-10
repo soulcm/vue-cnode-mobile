@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import routes from './configs/routes';
+import store from './vuex/index';
 
 import Index from './views/index';
 import './styles/main.less';
@@ -17,5 +18,6 @@ const router = new VueRouter({
 });
 
 new Vue({
-    router
+    router,
+    store
 }).$mount('#app');

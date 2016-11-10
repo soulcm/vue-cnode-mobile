@@ -1,4 +1,4 @@
-require('isomorphic-fetch');
+// require('isomorphic-fetch');
 
 const baseOpts = {
     method: 'get',
