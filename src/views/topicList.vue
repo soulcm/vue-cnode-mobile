@@ -38,6 +38,39 @@
     import nvHead from '../components/header';
 
     export default {
+        data() {
+            return {
+                topics: [],
+                searchOption: {
+                    page: 1,
+                    limit: 20,
+                    tab: 'all',
+                    mdrender: false
+                },
+            }
+        }
+
+        mounted() {
+            if (this.$route.query && this.$route.query.tab) {
+                this.searchOption.tab = this.$route.query.tab;
+            }
+            this.getTopics();
+        },
+
+        methods: {
+            getTopics() {
+
+            }
+        },
+
+        watch: {
+            '$route' (to) {
+                if (to.query && to.query.tab) {
+                    this.searchOption.tab = to.query.tab;
+                }
+            }
+        },
+
         components: {
             nvHead
         }
