@@ -4,7 +4,6 @@
 
         <router-view></router-view>
 
-
     </div>
 
 
@@ -20,7 +19,7 @@
     export default {
         data() {
             return {
-                message: 22332
+                show: false
             }
         },
 
