@@ -4,8 +4,8 @@
             <li>
                 <router-link :to="{name: 'topic', params:{id:1000}}">
                     <div class="top">
-                        <span>分享</span>
-                        <h3>23</h3>
+                        <span>分享1</span>
+                        <h3>233</h3>
                     </div>
                     <div class="bottom">
                         <span class="author"></span>

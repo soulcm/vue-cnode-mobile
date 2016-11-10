@@ -16,7 +16,6 @@
 
 <script>
     import nvHead from '../components/header';
-    import topicList from '../components/topicList';
 
     export default {
         data() {

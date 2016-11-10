@@ -1,7 +1,23 @@
 <template>
-    <header class="header-bar">
+    <div>
+        <span class="page-cover"
+            @click="toggleMenu"
+            v-if="show">
+        </span>
+        <header class="header-bar">
 
-    </header>
+            <span class="menu-btn"
+                @click="toggleMenu"></span>
+            <span class="info">
+                <span class="vue-logo"></span>
+                <span>全部</span>
+            </span>
+            <router-link :to="{name: 'create'}" class="publish-btn">
+                <i class="iconfont icon-publish"></i>
+            </router-link>
+        </header>
+        <nv-menu :show="show"></nv-menu>
+    </div>
 </template>
 
 <style>
@@ -10,8 +26,23 @@
 
 <script>
     import '../styles/header';
+    import nvMenu from './menu'
 
     export default {
+        data() {
+            return {
+                show: false
+            }
+        },
 
+        methods: {
+            toggleMenu() {
+                this.show = !this.show;
+            }
+        },
+
+        components: {
+            nvMenu
+        }
     }
 </script>

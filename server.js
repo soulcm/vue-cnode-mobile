@@ -6,7 +6,7 @@ var port = 8091;
 
 //启动服务
 var server = new WebpackDevServer(webpack(config), {
-    publicPath: '/dist/',
+    publicPath: 'http://127.0.0.1:8091/dist/',
     hot: true,
     noInfo: true,
     stats: {
