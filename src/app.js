@@ -5,6 +5,8 @@ import routes from './configs/routes';
 
 import Index from './views/index';
 import './styles/main.less';
+import 'github-markdown-css'; //markdown css
+
 
 Vue.use(VueRouter);
 // 实例化VueRouter

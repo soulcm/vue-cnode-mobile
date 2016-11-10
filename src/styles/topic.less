@@ -1,5 +1,6 @@
 .topic {
-    margin: 40px auto 0;
+    /*margin: 40px auto 0;*/
+    padding-top: 40px;
     .topic-list {
         li {
             border-bottom: 1px solid #f0f0f0;
@@ -58,5 +59,55 @@
                 }
             }
         }
+    }
+    .topic-title {
+        padding: 5px;
+        margin: 15px;
+        font-size: 1.8rem;
+        color: #2c3e50;
+        line-height: 1.5;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+    }
+    .author-info {
+        display: -webkit-flex;
+        display: flex;
+        align-items: center;
+        font-size: 1.2rem;
+        color: #34495e;
+        padding: 0 15px;
+        img.avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+        .center {
+            flex: 1;
+            .author, .info {
+                display: block;
+                padding: 5px 0;
+            }
+        }
+        .right {
+            .tag {
+                color: #fff;
+                padding: 5px 6px;
+                font-size: 1rem;
+                border-radius: 4px;
+                text-align: center;
+                display: block;
+                background-color: #E67E22;
+            }
+            .name {
+                padding: 5px 0;
+                display: block;
+            }
+        }
+    }
+    .topic-content {
+        padding: 15px;
+        margin-top: 15px;
+        border-bottom: 1px solid #d4d4d4;
     }
 }
