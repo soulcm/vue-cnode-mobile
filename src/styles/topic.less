@@ -119,4 +119,76 @@
         margin-top: 15px;
         border-bottom: 1px solid #d4d4d4;
     }
+    .topic-reply {
+        .topic-total {
+            padding: 15px;
+            border-bottom: 1px solid #d4d4d4;
+            strong {
+                color: #42b983;
+            }
+        }
+        .reply-list {
+            margin-top: 15px;
+            li {
+                padding: 15px;
+                border-bottom: 1px solid #d4d4d4;
+                .user {
+                    display: -webkit-flex;
+                    display: flex;
+                    .head {
+                        width: 45px;
+                        height: 45px;
+                        margin-right: 10px;
+                        display: inline-block;
+                    }
+                    .info {
+                        flex: 1;
+                        display: -webkit-flex;
+                        display: flex;
+                        align-items: center;
+                        .left {
+                            flex: 1;
+                            color: #626262;
+                        }
+                        .right {
+                            display: flex;
+                            align-items: center;
+                            .iconfont {
+                                font-size: 26px;
+                            }
+                        }
+                    }
+                }
+                .reply-content {
+                    margin-top: 15px;
+                    img {
+                        max-width: 100%;
+                        border: 0;
+                        vertical-align: middle;
+                    }
+                }
+                &:last-child {
+                    border-bottom:none;
+                }
+            }
+        }
+    }
+    .reply {
+         margin: 0 15px;
+         textarea {
+             width: 100%;
+             background-color: #fff;
+             font-size: 14px; //设置rem单位对textarea无效
+             padding: 15px;
+             color: #313131;
+             border: 1px solid #d5dbdb;
+         }
+         .btn-reply {
+             border-bottom: 2px solid #3aa373;
+             background-color: #4fc08d;
+             font-size: 1.6rem;
+             margin: 15px 0;
+             color: #fff;
+         }
+    }
 }

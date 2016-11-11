@@ -20,6 +20,38 @@
 
             <section class='markdown-body topic-content' v-html="topicInfo.content">
             </section>
+
+
+            <section class="topic-reply">
+                <h3 class="topic-total">
+                    <strong>{{topicInfo.reply_count}}</strong> 回复
+                </h3>
+
+                <ul class="reply-list">
+                    <li v-for="item in topicInfo.replies">
+                        <section class="user">
+                            <router-link :to="{name:'user',params:{loginname:item.author.loginname}}" >
+                                <img class="head" :src="item.author.avatar_url"/>
+                            </router-link>
+                            <div class="info">
+                                <span class="left">
+                                    <span class="name" v-text="item.author.loginname"></span>
+                                    <span class="name">
+                                        发布于:{{item.create_at | getTimeInfo}}
+                                    </span>
+                                </span>
+                                <span class="right">
+                                    <span style="margin-right: 5px" class="iconfont icon-dianzan"></span>
+                                    <span style="margin-right: 5px">{{item.ups.length}}</span>
+                                    <span class="iconfont icon-hf"></span>
+                                </span>
+                            </div>
+                        </section>
+                        <div class="reply-content markdown-body" v-html="item.content"></div>
+                    </li>
+                </ul>
+            </section>
+            <nv-reply></nv-reply>
         </div>
     </div>
 </template>
@@ -27,6 +59,7 @@
 <script>
     import { mapState } from 'vuex';
     import nvHead from '../components/header';
+    import nvReply from '../components/reply';
     import {GET_TOPIC_INFO} from '../constants/mutationTypes';
     import {getTimeInfo} from '../utils/index';
     export default {
@@ -57,7 +90,8 @@
         },
 
         components: {
-            nvHead
+            nvHead,
+            nvReply
         }
 
     }

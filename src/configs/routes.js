@@ -3,6 +3,7 @@ import TopicList from '../views/topicList';
 import Topic from '../views/topic';
 import NewTopic from '../views/newTopic';
 import Login from '../views/login';
+import User from '../views/user';
 
 const routes = [{
     path: '/',
@@ -23,6 +24,10 @@ const routes = [{
     path: '/login',
     name: 'login',
     component: Login
+}, {
+    path: '/user/:loginname',
+    name: 'user',
+    component: User
 }]
 
 
