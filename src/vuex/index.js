@@ -15,6 +15,10 @@ const store = new Vuex.Store({
             state.topics = data;
         },
 
+        [UPDATE_TOPIC_LIST](state, data) {
+            state.topics = [...state.topics, ...data];
+        },
+
         [GET_TOPIC_INFO](state, data) {
             state.topicInfo = data;
         }
@@ -25,6 +29,14 @@ const store = new Vuex.Store({
             topicList(data).then((res) => {
                 if (res.success) {
                     commit(GET_TOPIC_LIST, res.data)
+                }
+            })
+        },
+
+        [UPDATE_TOPIC_LIST]({commit}, data) {
+            topicList(data).then((res) => {
+                if (res.success) {
+                    commit(UPDATE_TOPIC_LIST, res.data)
                 }
             })
         },

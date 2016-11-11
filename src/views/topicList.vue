@@ -62,6 +62,11 @@
                 this.searchOption.tab = this.$route.query.tab;
             }
             this.getTopics();
+            document.addEventListener('scroll', this.getScrollData, false);
+        },
+
+        beforeDestroy() {
+            document.removeEventListener('scroll', this.getScrollData);
         },
 
         methods: {
@@ -77,6 +82,16 @@
                     tab = 'top';
                 }
                 return topicTab[tab]
+            },
+
+            getScrollData() {
+                const y = document.body.scrollTop || document.documentElement.scrollTop;
+                const documentH = document.documentElement.clientHeight;
+                const dom = document.querySelectorAll('.topic-list li');
+                if (dom[dom.length - 1].offsetTop + dom[dom.length - 1].offsetHeight <= y + documentH) {
+                    this.searchOption.page = this.searchOption.page + 1;
+                    this.$store.dispatch(UPDATE_TOPIC_LIST, this.searchOption);
+                }
             }
         },
 
@@ -95,6 +110,7 @@
                 if (to.query && to.query.tab) {
                     this.searchOption.tab = to.query.tab;
                 }
+                this.searchOption.page = 1;
                 this.getTopics();
                 // 隐藏导航栏
                 this.$refs.head.show = false;
