@@ -9,6 +9,6 @@ export const topicList = (data) => {
 
 export const topicInfo = (id) => {
     return fetchApi({
-        url: '/v1/topics/' + id
+        url: '/v1/topic/' + id
     })
 }

@@ -24,7 +24,9 @@
   },
   "homepage": "https://github.com/soulcm/vue-cnode-mobile#readme",
   "dependencies": {
+    "es6-promise": "^4.0.5",
     "github-markdown-css": "^2.4.1",
+    "isomorphic-fetch": "^2.2.1",
     "vue": "^2.0.5",
     "vue-router": "^2.0.1",
     "vuex": "^2.0.0"

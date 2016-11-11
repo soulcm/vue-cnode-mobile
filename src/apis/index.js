@@ -1,4 +1,4 @@
-// require('isomorphic-fetch');
+require('isomorphic-fetch');
 
 const baseOpts = {
     method: 'get',
@@ -6,7 +6,7 @@ const baseOpts = {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
     },
-    credentials: 'omit'
+    credentials: 'include'
 }
 
 const isObj = (obj) => {
@@ -53,10 +53,12 @@ const fetchApi = (cfg) => {
 
 
     return fetch(fetchUrl, opts).then((res) => {
-        if (res.status !== 200) {
-            return;
+        const isSuccess = res.ok || res.status >= 200 && res.status < 300;
+        if (isSuccess) {
+            return res.json();
+        } else {
+            throw res;
         }
-        return res.json();
     }).catch((err) => {
         console.log('Fetch Error : %S', err);
     })
