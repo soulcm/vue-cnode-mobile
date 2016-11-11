@@ -20,3 +20,8 @@ export const getTimeInfo = (str) => {
         return parseInt(time / 31536000000) + '年前';
     }
 }
+
+
+const throttle = (fn, delay) => {
+
+}
