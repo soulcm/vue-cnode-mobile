@@ -52,8 +52,7 @@
                     tab: 'all',
                     mdrender: false
                 },
-                activeColor: 'red',
-                fontSize: 30
+                scrollDelay: false
             }
         },
 
@@ -61,12 +60,41 @@
             if (this.$route.query && this.$route.query.tab) {
                 this.searchOption.tab = this.$route.query.tab;
             }
-            this.getTopics();
+            if (sessionStorage.getItem('tab') && sessionStorage.getItem('tab') === this.$route.query.tab) {
+                this.searchOption = JSON.parse(sessionStorage.getItem('searchOption'));
+            } else {
+                this.getTopics();
+            }
             document.addEventListener('scroll', this.getScrollData, false);
+        },
+
+        updated() {
+            this.scrollDelay = false;
         },
 
         beforeDestroy() {
             document.removeEventListener('scroll', this.getScrollData);
+        },
+
+        beforeRouteEnter(to, from, next) {
+            if (from.name !== 'topic' || to.query.tab !== sessionStorage.getItem('tab')) {
+                sessionStorage.removeItem('scrollTop');
+                sessionStorage.removeItem('searchOption');
+                sessionStorage.removeItem('tab');
+            }
+            next();
+        },
+
+        beforeRouteLeave(to, from, next) {
+            // 方便从详情页面返回到该页面的时候继续加载之前位置的数据
+            if (to.name === 'topic') {
+                // 当前滚动条位置
+                sessionStorage.setItem('scrollTop', document.body.scrollTop || document.documentElement.scrollTop);
+                // 查询参数
+                sessionStorage.setItem('searchOption', JSON.stringify(this.searchOption));
+                sessionStorage.setItem('tab', this.searchOption.tab);
+            }
+            next();
         },
 
         methods: {
@@ -88,8 +116,9 @@
                 const y = document.body.scrollTop || document.documentElement.scrollTop;
                 const documentH = document.documentElement.clientHeight;
                 const dom = document.querySelectorAll('.topic-list li');
-                if (dom[dom.length - 1].offsetTop + dom[dom.length - 1].offsetHeight <= y + documentH) {
+                if (dom[dom.length - 1].offsetTop + dom[dom.length - 1].offsetHeight <= y + documentH && !this.scrollDelay) {
                     this.searchOption.page = this.searchOption.page + 1;
+                    this.scrollDelay = true;
                     this.$store.dispatch(UPDATE_TOPIC_LIST, this.searchOption);
                 }
             }

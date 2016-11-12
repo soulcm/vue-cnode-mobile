@@ -16,11 +16,15 @@ const router = new VueRouter({
     mode: 'history',
     routes,
     scrollBehavior(to, from, savedPosition) {
-        if (savedPosition) {
-            return savedPosition
-        } else {
-            return { x: 0, y: 0 }
-        }
+        // if (to.name === 'list' && from.name === 'topic') {
+        //     return {x: 0, y: +sessionStorage.getItem('scrollTop') || 0}
+        // } else {
+            if (savedPosition) {
+                return savedPosition
+            } else {
+                return { x: 0, y: 0 }
+            }
+        // }
     }
 });
 
