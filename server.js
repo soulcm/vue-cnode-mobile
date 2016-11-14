@@ -3,6 +3,7 @@ var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 var config = require('./webpack.config.dev.js');
 var port = 8091;
+var favicon = require('serve-favicon');
 
 //启动服务
 var server = new WebpackDevServer(webpack(config), {
@@ -20,6 +21,8 @@ var server = new WebpackDevServer(webpack(config), {
     },
     historyApiFallback: true
 });
+
+server.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 //将其他路由，全部返回index.html
 /*server.use('*', function (req,res) {

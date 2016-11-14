@@ -1,6 +1,7 @@
 <template>
     <div>
-        <nv-head ref="head"></nv-head>
+        <nv-head ref="head"
+            :title="pageTitle"></nv-head>
         <section class="topic">
             <ul class="topic-list">
                 <li v-for="item of topics">
@@ -131,7 +132,11 @@
         },
 
         computed: {
-            ...mapState(['topics'])
+            ...mapState(['topics']),
+            pageTitle() {
+                const tab = (this.$route.query && this.$route.query.tab) || 'all';
+                return topicTab[tab];
+            }
         },
 
         watch: {

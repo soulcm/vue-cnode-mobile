@@ -3,5 +3,6 @@ export const topicTab = {
     'ask': '问答',
     'good': '精华',
     'job': '招聘',
-    'top': '置顶'
+    'top': '置顶',
+    'all': "全部"
 }

@@ -10,7 +10,7 @@
                 @click="toggleMenu"></span>
             <span class="info">
                 <span class="vue-logo"></span>
-                <span>全部</span>
+                <span>{{title}}</span>
             </span>
             <router-link :to="{name: 'create'}" class="publish-btn">
                 <i class="iconfont icon-publish"></i>
@@ -32,6 +32,13 @@
         data() {
             return {
                 show: false
+            }
+        },
+
+        props: {
+            title: {
+                type: String,
+                default: ''
             }
         },
 
