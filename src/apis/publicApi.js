@@ -12,3 +12,11 @@ export const topicInfo = (id) => {
         url: '/v1/topic/' + id
     })
 }
+
+export const login = (data) => {
+    return fetchApi({
+        url: 'v1/accesstoken',
+        method: 'post',
+        body: data
+    })
+}

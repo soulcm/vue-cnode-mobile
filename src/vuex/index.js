@@ -1,13 +1,14 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 Vue.use(Vuex);
-import {topicList, topicInfo} from '../apis/publicApi';
-import {GET_TOPIC_LIST, UPDATE_TOPIC_LIST, GET_TOPIC_INFO} from '../constants/mutationTypes';
+import {topicList, topicInfo, login} from '../apis/publicApi';
+import {GET_TOPIC_LIST, UPDATE_TOPIC_LIST, GET_TOPIC_INFO, LOGIN} from '../constants/mutationTypes';
 
 const store = new Vuex.Store({
     state: {
         topics: [],
-        topicInfo: {}
+        topicInfo: {},
+        userInfo: {}
     },
 
     mutations: {
@@ -21,6 +22,10 @@ const store = new Vuex.Store({
 
         [GET_TOPIC_INFO](state, data) {
             state.topicInfo = data;
+        },
+
+        [LOGIN](state, data) {
+            state.userInfo = data;
         }
     },
 
@@ -45,6 +50,22 @@ const store = new Vuex.Store({
             topicInfo(data).then((res) => {
                 if (res.success) {
                     commit(GET_TOPIC_INFO, res.data)
+                }
+            })
+        },
+
+        [LOGIN]({commit}, data) {
+            login(data).then((res) => {
+                if (res.success) {
+                    const user = {
+                        loginname: res.loginname,
+                        id: res.id,
+                        avatar_url: res.avatar_url,
+                        accesstoken: data.accesstoken
+                    }
+                    sessionStorage.setItem('userInfo', JSON.stringify(user));
+
+                    commit(LOGIN, user);
                 }
             })
         }
