@@ -4,6 +4,8 @@ import Topic from '../views/topic';
 import NewTopic from '../views/newTopic';
 import Login from '../views/login';
 import User from '../views/user';
+import Message from '../views/message';
+import About from '../views/about';
 
 const routes = [{
     path: '/',
@@ -17,9 +19,10 @@ const routes = [{
     name: 'topic',
     component: Topic
 }, {
-    path: '/topic/create',
+    path: '/create',
     name: 'create',
-    component: NewTopic
+    component: NewTopic,
+    meta: { requiresAuth: true }
 }, {
     path: '/login',
     name: 'login',
@@ -28,6 +31,15 @@ const routes = [{
     path: '/user/:loginname',
     name: 'user',
     component: User
+}, {
+    path: '/message',
+    name: 'message',
+    component: Message,
+    meta: { requiresAuth: true }
+}, {
+    path: '/about',
+    name: 'about',
+    component: About
 }]
 
 

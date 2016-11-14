@@ -29,7 +29,8 @@
                     accesstoken: this.token
                 }
                 this.$store.dispatch(LOGIN, data).then(() => {
-                    this.$router.push({name: 'list'});
+                    const redirect = decodeURIComponent(this.$route.query.redirect || 'list');
+                    this.$router.push({name: redirect});
                 })
             }
         },
@@ -49,14 +50,6 @@
                 }
             });
         }
-
-        // watch: {
-        //     userInfo(user) {
-        //         if (user.loginname) {
-        //             this.$router.push({name: 'list'});
-        //         }
-        //     }
-        // }
     }
 
 </script>

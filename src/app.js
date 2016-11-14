@@ -33,6 +33,22 @@ if (sessionStorage.getItem('userInfo')) {
     store.commit('LOGIN', JSON.parse(sessionStorage.getItem('userInfo')));
 }
 
+// 登录验证
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        if (store.state.userInfo.loginname) { //已登录
+            next();
+        } else { //未登录
+            next({
+                path: '/login',
+                query: { redirect: to.name } //缓存应该跳的页面,方便登录后直接跳转
+            });
+        }
+    } else {
+        next();
+    }
+});
+
 new Vue({
     router,
     store
