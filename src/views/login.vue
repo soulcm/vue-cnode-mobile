@@ -28,7 +28,9 @@
                 const data = {
                     accesstoken: this.token
                 }
-                this.$store.dispatch(LOGIN, data);
+                this.$store.dispatch(LOGIN, data).then(() => {
+                    this.$router.push({name: 'list'});
+                })
             }
         },
 
@@ -40,13 +42,21 @@
             nvHead
         },
 
-        watch: {
-            userInfo(user) {
-                if (user.loginname) {
-                    this.$router.push({name: 'list'});
+        beforeRouteEnter(to, from, next) {
+            next((vm) => {
+                if (vm.userInfo.loginname) {
+                    vm.$router.replace({name: 'list'});
                 }
-            }
+            });
         }
+
+        // watch: {
+        //     userInfo(user) {
+        //         if (user.loginname) {
+        //             this.$router.push({name: 'list'});
+        //         }
+        //     }
+        // }
     }
 
 </script>
