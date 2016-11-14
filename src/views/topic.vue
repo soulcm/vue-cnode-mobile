@@ -13,7 +13,8 @@
                     </time>
                 </div>
                 <div class="right">
-                    <span class="tag">精华</span>
+                    <span class="tag" v-text="getTabInfo(topicInfo)"
+                        :class="{color: topicInfo.good || topicInfo.top}"></span>
                     <span class="name">{{topicInfo.visit_count}}次浏览</span>
                 </div>
             </section>
@@ -43,7 +44,7 @@
                                 <span class="right">
                                     <span style="margin-right: 5px" class="iconfont icon-dianzan"></span>
                                     <span style="margin-right: 5px">{{item.ups.length}}</span>
-                                    <span class="iconfont icon-hf"></span>
+                                    <span class="iconfont icon-hf" @click="addReply"></span>
                                 </span>
                             </div>
                         </section>
@@ -51,7 +52,7 @@
                     </li>
                 </ul>
             </section>
-            <nv-reply></nv-reply>
+            <nv-reply v-if="userInfo.loginname"></nv-reply>
         </div>
     </div>
 </template>
@@ -62,6 +63,7 @@
     import nvReply from '../components/reply';
     import {GET_TOPIC_INFO} from '../constants/mutationTypes';
     import {getTimeInfo} from '../utils/index';
+    import {topicTab} from '../constants/topicInfo';
     export default {
         data() {
             return {
@@ -76,6 +78,25 @@
         methods: {
             getTopicInfo() {
                 this.$store.dispatch(GET_TOPIC_INFO, this.$route.params.id);
+            },
+
+            getTabInfo(item) {
+                let tab = item.tab;
+                if (item.good) {
+                    tab = 'good';
+                } else if (item.top) {
+                    tab = 'top';
+                }
+                return topicTab[tab]
+            },
+
+            addReply() {
+                if (!this.userInfo.loginname) {
+                    this.$router.push({
+                        name: 'login',
+                        query: { redirect: encodeURIComponent(this.$route.fullPath) }
+                    });
+                }
             }
         },
 
@@ -86,7 +107,7 @@
         },
 
         computed: {
-            ...mapState(['topicInfo'])
+            ...mapState(['topicInfo', 'userInfo'])
         },
 
         components: {

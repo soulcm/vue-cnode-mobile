@@ -29,8 +29,8 @@
                     accesstoken: this.token
                 }
                 this.$store.dispatch(LOGIN, data).then(() => {
-                    const redirect = decodeURIComponent(this.$route.query.redirect || 'list');
-                    this.$router.push({name: redirect});
+                    const redirect = decodeURIComponent(this.$route.query.redirect || '/');
+                    this.$router.push({path: redirect});
                 })
             }
         },
