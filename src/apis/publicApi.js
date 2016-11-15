@@ -28,3 +28,17 @@ export const reply = (data, id) => {
         body: data
     })
 }
+
+export const messageCount = (data) => {
+    return fetchApi({
+        url: `v1/message/count`,
+        body: data
+    })
+}
+
+export const messages = (data) => {
+    return fetchApi({
+        url: `v1/messages`,
+        body: data
+    })
+}

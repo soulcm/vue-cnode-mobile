@@ -31,4 +31,21 @@ npm run dev
 服务启动后，手机端可访问本机ip查看
 
 
-吐槽: vscode对vue的支持好差
+吐槽: vscode编辑器对vue的支持好差
+
+
+![全部](./snapshoot/all.jpg)
+
+![精华](./snapshoot/good.jpg)
+
+![登录](./snapshoot/login.jpg)
+
+![菜单](./snapshoot/menu.jpg)
+
+![已登录](./snapshoot/islogin.jpg)
+
+![文章详情](./snapshoot/topic.jpg)
+
+![回复](./snapshoot/reply.jpg)
+
+![消息](./snapshoot/message.jpg)

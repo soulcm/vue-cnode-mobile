@@ -1,6 +1,6 @@
 <template>
     <div>
-        <nv-head></nv-head>
+        <nv-head title="登录"></nv-head>
         <section class="login">
             <div class="login-token">
                 <input class="txt" type="text" placeholder="Access Token" v-model="token" maxlength="36">
