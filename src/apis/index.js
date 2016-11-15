@@ -7,7 +7,8 @@ const baseOpts = {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
     },
-    credentials: 'include'
+    // credentials: 'include',
+    mode: 'cors'
 }
 
 const isObj = (obj) => {
