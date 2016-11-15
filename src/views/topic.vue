@@ -52,7 +52,8 @@
                         <nv-reply v-if="userInfo.loginname && replyId === item.id"
                             :reply-to="item.author.loginname"
                             :reply-id="item.id"
-                            :topic-id="topicId"></nv-reply>
+                            :topic-id="topicId"
+                            @onReply="handleReply"></nv-reply>
                     </li>
                 </ul>
             </section>
@@ -105,6 +106,10 @@
                     });
                 }
                 this.replyId = id;
+            },
+
+            handleReply() {
+                this.replyId = '';
             }
         },
 

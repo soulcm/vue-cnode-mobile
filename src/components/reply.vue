@@ -31,12 +31,15 @@
         methods: {
             handleReply() {
                 const data = {
-                    accesstoken: this.userInfo.token,
+                    accesstoken: this.userInfo.accesstoken,
                     content: this.content,
                     reply_id: this.replyId,
                     topicId: this.topicId
                 }
-                this.$store.dispatch(REPLY, data)
+                this.$store.dispatch(REPLY, data).then(() => {
+                    this.content = '';
+                    this.$emit('onReply')
+                })
             }
         },
 

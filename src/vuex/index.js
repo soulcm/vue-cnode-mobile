@@ -73,12 +73,12 @@ const store = new Vuex.Store({
             })
         },
 
-        [REPLY]({commit}, data) {
+        [REPLY]({commit, dispatch}, data) {
             const topicId = data.topicId;
             delete data.topicId;
             reply(data, topicId).then((res) => {
                 if (res.success) {
-
+                    dispatch(GET_TOPIC_INFO, topicId);
                 }
             })
         }

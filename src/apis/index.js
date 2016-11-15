@@ -66,17 +66,6 @@ const fetchApi = (cfg) => {
             reject();
         })
     })
-
-    // return fetch(fetchUrl, opts).then((res) => {
-    //     const isSuccess = res.ok || res.status >= 200 && res.status < 300;
-    //     if (isSuccess) {
-    //         return res.json();
-    //     } else {
-    //         throw res;
-    //     }
-    // }).catch((err) => {
-    //     console.log('Fetch Error : %S', err);
-    // })
 }
 
 export default fetchApi
