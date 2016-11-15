@@ -3,6 +3,11 @@
 
 现在学习vue和移动端新知识，重新搭建cnode
 
+线上地址: [vue-cnode-mobile](https://soulcm.github.io/vue-cnode-mobile/)，当然能不能打开，真的是看脸的
+
+
+你可以将代码down下来，然后本地运行，绝对能打开
+
 
 知识点：
 * vue2
