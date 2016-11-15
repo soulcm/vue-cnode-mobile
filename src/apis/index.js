@@ -53,16 +53,30 @@ const fetchApi = (cfg) => {
     }
 
 
-    return fetch(fetchUrl, opts).then((res) => {
-        const isSuccess = res.ok || res.status >= 200 && res.status < 300;
-        if (isSuccess) {
-            return res.json();
-        } else {
-            throw res;
-        }
-    }).catch((err) => {
-        console.log('Fetch Error : %S', err);
+    return new Promise((resolve, reject) => {
+        fetch(fetchUrl, opts).then((res) => {
+            const isSuccess = res.ok || res.status >= 200 && res.status < 300;
+            if (isSuccess) {
+                const data = res.headers.get('content-type') && res.headers.get('content-type').indexOf('json') >= 0 ? res.json() : res.text();
+                resolve(data);
+            } else {
+                throw res
+            }
+        }).catch((err) => {
+            reject();
+        })
     })
+
+    // return fetch(fetchUrl, opts).then((res) => {
+    //     const isSuccess = res.ok || res.status >= 200 && res.status < 300;
+    //     if (isSuccess) {
+    //         return res.json();
+    //     } else {
+    //         throw res;
+    //     }
+    // }).catch((err) => {
+    //     console.log('Fetch Error : %S', err);
+    // })
 }
 
 export default fetchApi

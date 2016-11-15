@@ -59,21 +59,17 @@ const store = new Vuex.Store({
         },
 
         [LOGIN]({commit}, data) {
-            return new Promise((resolve, reject) => {
-                login(data).then((res) => {
-                    if (res.success) {
-                        const user = {
-                            loginname: res.loginname,
-                            id: res.id,
-                            avatar_url: res.avatar_url,
-                            accesstoken: data.accesstoken
-                        }
-                        sessionStorage.setItem('userInfo', JSON.stringify(user));
-
-                        commit(LOGIN, user);
-                        resolve();
+            return login(data).then((res) => {
+                if (res.success) {
+                    const user = {
+                        loginname: res.loginname,
+                        id: res.id,
+                        avatar_url: res.avatar_url,
+                        accesstoken: data.accesstoken
                     }
-                })
+                    sessionStorage.setItem('userInfo', JSON.stringify(user));
+                    commit(LOGIN, user);
+                }
             })
         },
 
