@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 Vue.use(Vuex);
-import {topicList, topicInfo, login} from '../apis/publicApi';
-import {GET_TOPIC_LIST, UPDATE_TOPIC_LIST, GET_TOPIC_INFO, LOGIN} from '../constants/mutationTypes';
+import {topicList, topicInfo, login, reply} from '../apis/publicApi';
+import {GET_TOPIC_LIST, UPDATE_TOPIC_LIST, GET_TOPIC_INFO, LOGIN, REPLY} from '../constants/mutationTypes';
 
 const store = new Vuex.Store({
     state: {
@@ -26,6 +26,10 @@ const store = new Vuex.Store({
 
         [LOGIN](state, data) {
             state.userInfo = data;
+        },
+
+        [REPLY](state, data) {
+
         }
     },
 
@@ -71,9 +75,16 @@ const store = new Vuex.Store({
                     }
                 })
             })
+        },
 
+        [REPLY]({commit}, data) {
+            const topicId = data.topicId;
+            delete data.topicId;
+            reply(data, topicId).then((res) => {
+                if (res.success) {
 
-
+                }
+            })
         }
     }
 })

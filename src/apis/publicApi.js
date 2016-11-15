@@ -20,3 +20,11 @@ export const login = (data) => {
         body: data
     })
 }
+
+export const reply = (data, id) => {
+    return fetchApi({
+        url: `v1/topic/${id}/replies`,
+        method: 'post',
+        body: data
+    })
+}

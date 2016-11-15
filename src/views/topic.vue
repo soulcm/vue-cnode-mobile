@@ -44,15 +44,20 @@
                                 <span class="right">
                                     <span style="margin-right: 5px" class="iconfont icon-dianzan"></span>
                                     <span style="margin-right: 5px">{{item.ups.length}}</span>
-                                    <span class="iconfont icon-hf" @click="addReply"></span>
+                                    <span class="iconfont icon-hf" @click="addReply(item.id)"></span>
                                 </span>
                             </div>
                         </section>
                         <div class="reply-content markdown-body" v-html="item.content"></div>
+                        <nv-reply v-if="userInfo.loginname && replyId === item.id"
+                            :reply-to="item.author.loginname"
+                            :reply-id="item.id"
+                            :topic-id="topicId"></nv-reply>
                     </li>
                 </ul>
             </section>
-            <nv-reply v-if="userInfo.loginname"></nv-reply>
+            <nv-reply v-if="userInfo.loginname"
+                :topic-id="topicId"></nv-reply>
         </div>
     </div>
 </template>
@@ -67,17 +72,19 @@
     export default {
         data() {
             return {
-
+                replyId: '',
+                topicId: '',
             }
         },
 
         mounted() {
+            this.topicId = this.$route.params.id;
             this.getTopicInfo();
         },
 
         methods: {
             getTopicInfo() {
-                this.$store.dispatch(GET_TOPIC_INFO, this.$route.params.id);
+                this.$store.dispatch(GET_TOPIC_INFO, this.topicId);
             },
 
             getTabInfo(item) {
@@ -90,13 +97,14 @@
                 return topicTab[tab]
             },
 
-            addReply() {
+            addReply(id) {
                 if (!this.userInfo.loginname) {
                     this.$router.push({
                         name: 'login',
                         query: { redirect: encodeURIComponent(this.$route.fullPath) }
                     });
                 }
+                this.replyId = id;
             }
         },
 

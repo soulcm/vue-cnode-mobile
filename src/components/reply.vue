@@ -4,17 +4,44 @@
             v-model="content"
             placeholder='回复支持Markdown语法,请注意标记代码'>
         </textarea>
-        <button class="btn btn-reply btn-reply-confirm">确定</button>
+        <button class="btn btn-reply btn-reply-confirm"
+            @click="handleReply">确定</button>
     </section>
 
 </template>
 
 <script>
+    import { mapState } from 'vuex';
+    import { REPLY } from '../constants/mutationTypes';
     export default {
         data() {
             return {
                 content: ''
             }
-        }
+        },
+
+        props: ['replyId', 'replyTo', 'topicId'],
+
+        mounted() {
+            if (this.replyTo) {
+                this.content = `@${this.replyTo} `;
+            }
+        },
+
+        methods: {
+            handleReply() {
+                const data = {
+                    accesstoken: this.userInfo.token,
+                    content: this.content,
+                    reply_id: this.replyId,
+                    topicId: this.topicId
+                }
+                this.$store.dispatch(REPLY, data)
+            }
+        },
+
+        computed: {
+            ...mapState(['userInfo'])
+        },
     }
 </script>
