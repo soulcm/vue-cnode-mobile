@@ -29,6 +29,7 @@
                 </li>
             </ul>
         </section>
+        <nv-top></nv-top>
     </div>
 </template>
 
@@ -40,6 +41,7 @@
     import { mapState } from 'vuex';
     import '../styles/topic';
     import nvHead from '../components/header';
+    import nvTop from '../components/backTop';
     import {GET_TOPIC_LIST, UPDATE_TOPIC_LIST} from '../constants/mutationTypes';
     import {topicTab} from '../constants/topicInfo';
     import {getTimeInfo} from '../utils/index';
@@ -152,7 +154,8 @@
         },
 
         components: {
-            nvHead
+            nvHead,
+            nvTop
         }
     }
 </script>

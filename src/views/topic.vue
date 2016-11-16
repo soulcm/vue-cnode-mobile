@@ -60,6 +60,7 @@
             <nv-reply v-if="userInfo.loginname"
                 :topic-id="topicId"></nv-reply>
         </div>
+        <nv-top></nv-top>
     </div>
 </template>
 
@@ -67,6 +68,7 @@
     import { mapState } from 'vuex';
     import nvHead from '../components/header';
     import nvReply from '../components/reply';
+    import nvTop from '../components/backTop';
     import {GET_TOPIC_INFO} from '../constants/mutationTypes';
     import {getTimeInfo} from '../utils/index';
     import {topicTab} from '../constants/topicInfo';
@@ -125,7 +127,8 @@
 
         components: {
             nvHead,
-            nvReply
+            nvReply,
+            nvTop
         }
 
     }
