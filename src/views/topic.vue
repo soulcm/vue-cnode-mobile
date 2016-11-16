@@ -55,6 +55,7 @@
                             :reply-to="item.author.loginname"
                             :reply-id="item.id"
                             :topic-id="topicId"
+                            :focus="true"
                             @onReply="handleReply"></nv-reply>
                     </li>
                 </ul>
@@ -142,7 +143,6 @@
                         }
                     }
                 })
-                // this.$store.dispatch(UP_REPLY, id);
             }
         },
 
