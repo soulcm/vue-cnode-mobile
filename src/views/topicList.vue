@@ -63,7 +63,7 @@
             if (this.$route.query && this.$route.query.tab) {
                 this.searchOption.tab = this.$route.query.tab;
             }
-            if (sessionStorage.getItem('tab') && sessionStorage.getItem('tab') === this.$route.query.tab) {
+            if (sessionStorage.getItem('tab') && sessionStorage.getItem('tab') === (this.$route.query.tab || 'all')) {
                 this.searchOption = JSON.parse(sessionStorage.getItem('searchOption'));
             } else {
                 this.getTopics();
@@ -80,7 +80,7 @@
         },
 
         beforeRouteEnter(to, from, next) {
-            if (from.name !== 'topic' || to.query.tab !== sessionStorage.getItem('tab')) {
+            if (from.name !== 'topic' || (to.query.tab || 'all') !== sessionStorage.getItem('tab')) {
                 sessionStorage.removeItem('scrollTop');
                 sessionStorage.removeItem('searchOption');
                 sessionStorage.removeItem('tab');
