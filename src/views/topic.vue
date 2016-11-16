@@ -42,7 +42,9 @@
                                     </span>
                                 </span>
                                 <span class="right">
-                                    <span style="margin-right: 5px" class="iconfont icon-dianzan"></span>
+                                    <span style="margin-right: 5px" class="iconfont icon-dianzan"
+                                        :class="{'uped': isUps(item.ups)}"
+                                        @click="handleUpReply(item)"></span>
                                     <span style="margin-right: 5px">{{item.ups.length}}</span>
                                     <span class="iconfont icon-hf" @click="addReply(item.id)"></span>
                                 </span>
@@ -69,9 +71,10 @@
     import nvHead from '../components/header';
     import nvReply from '../components/reply';
     import nvTop from '../components/backTop';
-    import {GET_TOPIC_INFO} from '../constants/mutationTypes';
+    import {GET_TOPIC_INFO, UP_REPLY} from '../constants/mutationTypes';
     import {getTimeInfo} from '../utils/index';
     import {topicTab} from '../constants/topicInfo';
+    import {upReply} from '../apis/publicApi';
     export default {
         data() {
             return {
@@ -112,6 +115,34 @@
 
             handleReply() {
                 this.replyId = '';
+            },
+
+            isUps(ups) {
+                return ups.indexOf(this.userInfo.id) > -1
+            },
+
+            handleUpReply(item) {
+                if (!this.userInfo.loginname) {
+                    this.$router.push({
+                        name: 'login',
+                        query: { redirect: encodeURIComponent(this.$route.fullPath) }
+                    });
+                    return;
+                }
+
+                upReply({accesstoken: this.userInfo.accesstoken}, item.id).then((res) => {
+                    if (res.success) {
+                        if (res.action === 'down') {
+                            const index = item.ups.indexOf(this.userInfo.id);
+                            if (index > -1) {
+                                item.ups.splice(index, 1);
+                            }
+                        } else {
+                            item.ups.push(this.userInfo.id);
+                        }
+                    }
+                })
+                // this.$store.dispatch(UP_REPLY, id);
             }
         },
 

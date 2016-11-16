@@ -42,3 +42,11 @@ export const messages = (data) => {
         body: data
     })
 }
+
+export const upReply = (data, id) => {
+    return fetchApi({
+        url: `v1/reply/${id}/ups`,
+        method: 'post',
+        body: data
+    })
+}

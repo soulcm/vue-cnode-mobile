@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 Vue.use(Vuex);
-import {topicList, topicInfo, login, reply, messages} from '../apis/publicApi';
+import {topicList, topicInfo, login, reply, messages, upReply} from '../apis/publicApi';
 import {GET_TOPIC_LIST, UPDATE_TOPIC_LIST, GET_TOPIC_INFO, LOGIN, REPLY} from '../constants/mutationTypes';
 
 const store = new Vuex.Store({
@@ -26,10 +26,6 @@ const store = new Vuex.Store({
 
         [LOGIN](state, data) {
             state.userInfo = data;
-        },
-
-        [REPLY](state, data) {
-
         }
     },
 
