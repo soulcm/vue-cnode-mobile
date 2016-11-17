@@ -17,8 +17,8 @@ baseWebpackConfig.plugins = baseWebpackConfig.plugins.concat([
         },
         output: {comments: false},
     }),
-    new webpack.optimize.CommonsChunkPlugin('vendor', 'lib/vendor.[chunkhash].js'),
-    new ExtractTextPlugin('lib/[name].[contenthash].css', {allChunks: true}),
+    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.[chunkhash:8].js'),
+    new ExtractTextPlugin('[name].[contenthash:8].css', {allChunks: true}),
     new HtmlWebpackPlugin({
         title: 'vue-cnode',
         template: 'template/index.html',
@@ -30,8 +30,9 @@ baseWebpackConfig.plugins = baseWebpackConfig.plugins.concat([
 
 module.exports = merge(baseWebpackConfig, {
     output: {
-        path: path.join(__dirname, 'dist'),
-        filename: 'lib/[name].[chunkhash].js',
-        chunkFilename: 'lib/[id].build.[chunkhash].js'
+        path: path.join(__dirname, 'lib'),
+        filename: '[name].[chunkhash:8].js',
+        chunkFilename: '[id].build.[chunkhash:8].js',
+        publicPath: '/vue-cnode-mobile/lib/'
     }
 })
