@@ -29,7 +29,7 @@
                     accesstoken: this.token
                 }
                 this.$store.dispatch(LOGIN, data).then(() => {
-                    const redirect = decodeURIComponent(this.$route.query.redirect || '/');
+                    const redirect = decodeURIComponent(this.$route.query.redirect || '/vue-cnode-mobile');
                     this.$router.push({path: redirect});
                 })
             }
