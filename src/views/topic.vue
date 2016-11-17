@@ -108,7 +108,7 @@
                 if (!this.userInfo.loginname) {
                     this.$router.push({
                         name: 'login',
-                        query: { redirect: encodeURIComponent(this.$route.fullPath) }
+                        query: { redirect: encodeURIComponent(this.$route.name) }
                     });
                 }
                 this.replyId = id;
@@ -126,7 +126,7 @@
                 if (!this.userInfo.loginname) {
                     this.$router.push({
                         name: 'login',
-                        query: { redirect: encodeURIComponent(this.$route.fullPath) }
+                        query: { redirect: encodeURIComponent(this.$route.name) }
                     });
                     return;
                 }
