@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "cross-env NODE_ENV=development nodemon server.js --ignore src/",
     "build": "npm run clean && cross-env NODE_ENV=production webpack --config webpack.config.prod.js --progress",
-    "clean": "rimraf dist/*"
+    "clean": "rimraf lib/*"
   },
   "repository": {
     "type": "git",
