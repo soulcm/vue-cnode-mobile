@@ -15,7 +15,7 @@ baseWebpackConfig.plugins.push(
             NODE_ENV: JSON.stringify('development')
         }
     }),
-    new webpack.optimize.CommonsChunkPlugin('commons', 'commons.js'),
+    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
     new ExtractTextPlugin('[name].css', {allChunks: true}),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin()
@@ -27,6 +27,7 @@ module.exports = merge(baseWebpackConfig, {
     output: {
         path: path.join(__dirname, 'dist'),
         filename: '[name].js',
-        publicPath: '/dist/'
+        publicPath: '/dist/',
+        chunkFilename: '[id].build.js'
     }
 })
