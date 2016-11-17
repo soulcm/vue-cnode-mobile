@@ -76,6 +76,7 @@
     import {getTimeInfo} from '../utils/index';
     import {topicTab} from '../constants/topicInfo';
     import {upReply} from '../apis/publicApi';
+    import store from '../vuex/index';
     export default {
         data() {
             return {
@@ -150,6 +151,11 @@
             getTimeInfo(str) {
                 return getTimeInfo(str)
             }
+        },
+
+        beforeRouteEnter(to, from, next) {
+            store.state.topicInfo = {};
+            next();
         },
 
         computed: {

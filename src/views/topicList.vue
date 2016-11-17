@@ -119,7 +119,7 @@
                 const y = document.body.scrollTop || document.documentElement.scrollTop;
                 const documentH = document.documentElement.clientHeight;
                 const dom = document.querySelectorAll('.topic-list li');
-                if (dom[dom.length - 1].offsetTop + dom[dom.length - 1].offsetHeight <= y + documentH && !this.scrollDelay) {
+                if (dom.length && (dom[dom.length - 1].offsetTop + dom[dom.length - 1].offsetHeight <= y + documentH) && !this.scrollDelay) {
                     this.searchOption.page = this.searchOption.page + 1;
                     this.scrollDelay = true;
                     this.$store.dispatch(UPDATE_TOPIC_LIST, this.searchOption);
