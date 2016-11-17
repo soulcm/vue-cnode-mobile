@@ -50,8 +50,8 @@ router.beforeEach((to, from, next) => {
             next();
         } else { //未登录
             next({
-                path: '/login',
-                query: { redirect: encodeURIComponent(to.fullPath) } //缓存应该跳的页面,方便登录后直接跳转
+                name: 'login',
+                query: { redirect: encodeURIComponent(to.name) } //缓存应该跳的页面,方便登录后直接跳转
             });
         }
     } else {

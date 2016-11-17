@@ -50,3 +50,11 @@ export const upReply = (data, id) => {
         body: data
     })
 }
+
+export const addTopic = (data) => {
+    return fetchApi({
+        url: `v1/topics`,
+        method: 'post',
+        body: data
+    })
+}
