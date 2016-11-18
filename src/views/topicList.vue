@@ -5,7 +5,7 @@
         <section class="topic">
             <ul class="topic-list">
                 <li v-for="item of topics">
-                    <router-link :to="{name: 'topic', params:{id:item.id}}">
+                    <router-link key="item.id" :to="{name: 'topic', params:{id:item.id}}">
                         <div class="top">
                             <span class="normal" :class="{color: item.good || item.top}"
                                 v-text="getTabInfo(item)"></span>
@@ -29,12 +29,49 @@
                 </li>
             </ul>
         </section>
+        <div v-show="showListLoad">
+            <div class="loading">
+                <i class="iconfont icon-loading"></i>
+            </div>
+        </div>
         <nv-top></nv-top>
+        <nv-load :show="showLoad"></nv-load>
     </div>
 </template>
 
-<style>
+<style lang="less" scoped>
+    .loading {
+        width: 120px;
+        /*height: 120px;*/
+        margin: 5px auto;
+        text-align: center;
+        .icon-loading {
+            color: #ccc;
+            display: inline-block;
+            font-size: 5rem;
+            -webkit-animation: gif 1s infinite linear;
+            animation: gif 1s infinite linear;
+        }
 
+        @keyframes gif {
+            0% {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+            100% {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+        @-webkit-keyframes gif {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+    }
 </style>
 
 <script>
@@ -42,6 +79,7 @@
     import '../styles/topic';
     import nvHead from '../components/header';
     import nvTop from '../components/backTop';
+    import nvLoad from '../components/loading';
     import {GET_TOPIC_LIST, UPDATE_TOPIC_LIST} from '../constants/mutationTypes';
     import {topicTab} from '../constants/topicInfo';
     import {getTimeInfo} from '../utils/index';
@@ -69,10 +107,6 @@
                 this.getTopics();
             }
             document.addEventListener('scroll', this.getScrollData, false);
-        },
-
-        updated() {
-            this.scrollDelay = false;
         },
 
         beforeDestroy() {
@@ -122,7 +156,9 @@
                 if (dom.length && (dom[dom.length - 1].offsetTop + dom[dom.length - 1].offsetHeight <= y + documentH) && !this.scrollDelay) {
                     this.searchOption.page = this.searchOption.page + 1;
                     this.scrollDelay = true;
-                    this.$store.dispatch(UPDATE_TOPIC_LIST, this.searchOption);
+                    this.$store.dispatch(UPDATE_TOPIC_LIST, this.searchOption).then(() => {
+                        this.scrollDelay = false;
+                    });
                 }
             }
         },
@@ -134,7 +170,7 @@
         },
 
         computed: {
-            ...mapState(['topics']),
+            ...mapState(['topics', 'showLoad', 'showListLoad']),
             pageTitle() {
                 const tab = (this.$route.query && this.$route.query.tab) || 'all';
                 return topicTab[tab];
@@ -155,7 +191,8 @@
 
         components: {
             nvHead,
-            nvTop
+            nvTop,
+            nvLoad
         }
     }
 </script>

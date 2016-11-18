@@ -64,6 +64,7 @@
                 :topic-id="topicId"></nv-reply>
         </div>
         <nv-top></nv-top>
+        <nv-load :show="showLoad"></nv-load>
     </div>
 </template>
 
@@ -72,6 +73,7 @@
     import nvHead from '../components/header';
     import nvReply from '../components/reply';
     import nvTop from '../components/backTop';
+    import nvLoad from '../components/loading';
     import {GET_TOPIC_INFO, UP_REPLY} from '../constants/mutationTypes';
     import {getTimeInfo} from '../utils/index';
     import {topicTab} from '../constants/topicInfo';
@@ -159,13 +161,14 @@
         },
 
         computed: {
-            ...mapState(['topicInfo', 'userInfo'])
+            ...mapState(['topicInfo', 'userInfo', 'showLoad'])
         },
 
         components: {
             nvHead,
             nvReply,
-            nvTop
+            nvTop,
+            nvLoad
         }
 
     }

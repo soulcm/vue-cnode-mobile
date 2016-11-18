@@ -2,13 +2,15 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 Vue.use(Vuex);
 import {topicList, topicInfo, login, reply, messages, upReply} from '../apis/publicApi';
-import {GET_TOPIC_LIST, UPDATE_TOPIC_LIST, GET_TOPIC_INFO, LOGIN, REPLY} from '../constants/mutationTypes';
+import {GET_TOPIC_LIST, UPDATE_TOPIC_LIST, GET_TOPIC_INFO, LOGIN, REPLY, TOOGLE_LOAD, TOOGLE_LIST_LOAD} from '../constants/mutationTypes';
 
 const store = new Vuex.Store({
     state: {
         topics: [],
         topicInfo: {},
-        userInfo: {}
+        userInfo: {},
+        showLoad: false, //页面等待效果
+        showListLoad: false //list划到底后的等待效果
     },
 
     mutations: {
@@ -26,29 +28,52 @@ const store = new Vuex.Store({
 
         [LOGIN](state, data) {
             state.userInfo = data;
+        },
+
+        [TOOGLE_LOAD](state, data) {
+            if (data) {
+                state.showLoad = data;
+            } else {
+                state.showLoad = !state.showLoad;
+            }
+        },
+
+        [TOOGLE_LIST_LOAD](state, data) {
+            if (data) {
+                state.showListLoad = data;
+            } else {
+                state.showListLoad = !state.showListLoad;
+            }
         }
     },
 
     actions: {
         [GET_TOPIC_LIST]({commit}, data) {
-            topicList(data).then((res) => {
+            commit(TOOGLE_LOAD, true);
+            return topicList(data).then((res) => {
                 if (res.success) {
-                    commit(GET_TOPIC_LIST, res.data)
+                    commit(TOOGLE_LOAD, false);
+                    commit(GET_TOPIC_LIST, res.data);
                 }
             })
         },
 
         [UPDATE_TOPIC_LIST]({commit}, data) {
-            topicList(data).then((res) => {
+            commit(TOOGLE_LIST_LOAD, true);
+
+            return topicList(data).then((res) => {
                 if (res.success) {
+                    commit(TOOGLE_LIST_LOAD, false);
                     commit(UPDATE_TOPIC_LIST, res.data)
                 }
             })
         },
 
         [GET_TOPIC_INFO]({commit}, data) {
+            commit(TOOGLE_LOAD, true);
             topicInfo(data).then((res) => {
                 if (res.success) {
+                    commit(TOOGLE_LOAD, false);
                     commit(GET_TOPIC_INFO, res.data)
                 }
             })
@@ -77,7 +102,7 @@ const store = new Vuex.Store({
                     dispatch(GET_TOPIC_INFO, topicId);
                 }
             })
-        }
+        },
     }
 })
 
