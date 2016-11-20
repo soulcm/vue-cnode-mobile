@@ -33,7 +33,7 @@
             handleReply() {
                 const data = {
                     accesstoken: this.userInfo.accesstoken,
-                    content: this.content,
+                    content: this.content + '<br/><br/><a class="form" href="https://github.com/soulcm/react-cnode-mobile">vue-cnode-mobile</a>',
                     reply_id: this.replyId,
                     topicId: this.topicId
                 }
