@@ -5,7 +5,10 @@
             <h2 class="topic-title" v-text="topicInfo.title"></h2>
 
             <section class="author-info">
-                <img :src="topicInfo.author.avatar_url" alt="" class="avatar">
+                <router-link :to="{name:'user',params:{loginname:topicInfo.author.loginname}}">
+                    <img :src="topicInfo.author.avatar_url" alt="" class="avatar">
+                </router-link>
+
                 <div class="center">
                     <span class="author" v-text="topicInfo.author.loginname"></span>
                     <time class="info">

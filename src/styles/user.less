@@ -31,4 +31,31 @@
         }
 
     }
+    .user-active {
+        .active-content {
+            display: -webkit-flex;
+            display: flex;
+            padding: 5px 10px;
+            border-bottom: 1px solid #f0f0f0;
+            .head {
+                img {
+                    width: 40px;
+                    height: 40px;
+                    margin-right: 15px;
+                    border-radius: 50%;
+                    border: 2px solid #fff6e6;
+                }
+            }
+            .right {
+                flex: 1;
+                overflow: hidden;
+                .tpoic-title {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    display: block;
+                }
+            }
+        }
+    }
 }
