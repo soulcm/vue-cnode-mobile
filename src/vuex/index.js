@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 Vue.use(Vuex);
 import {topicList, topicInfo, login, reply, messages, upReply} from '../apis/publicApi';
-import {GET_TOPIC_LIST, UPDATE_TOPIC_LIST, GET_TOPIC_INFO, LOGIN, REPLY, TOOGLE_LOAD, TOOGLE_LIST_LOAD} from '../constants/mutationTypes';
+import {GET_TOPIC_LIST, UPDATE_TOPIC_LIST, GET_TOPIC_INFO, LOGIN, LOGIN_OUT, REPLY, TOOGLE_LOAD, TOOGLE_LIST_LOAD} from '../constants/mutationTypes';
 
 const store = new Vuex.Store({
     state: {
@@ -44,6 +44,11 @@ const store = new Vuex.Store({
             } else {
                 state.showListLoad = !state.showListLoad;
             }
+        },
+
+        [LOGIN_OUT](state) {
+            state.userInfo = {};
+            localStorage.removeItem('userInfo');
         }
     },
 
@@ -88,7 +93,7 @@ const store = new Vuex.Store({
                         avatar_url: res.avatar_url,
                         accesstoken: data.accesstoken
                     }
-                    sessionStorage.setItem('userInfo', JSON.stringify(user));
+                    localStorage.setItem('userInfo', JSON.stringify(user));
                     commit(LOGIN, user);
                 }
             })

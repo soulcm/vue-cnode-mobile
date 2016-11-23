@@ -1,0 +1,81 @@
+.user-page {
+    padding-top: 40px;
+    .info {
+        background-color: #e7e7e7;
+        padding: 15px 0;
+        img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            display: block;
+            margin: 0 auto;
+        }
+        span.name {
+            text-align: center;
+            margin-top: 5px;
+            display: block;
+        }
+        .bottom {
+            margin-top: 15px;
+            display: -webkit-flex;
+            display: flex;
+            .time {
+                text-align: center;
+                flex: 1;
+            }
+            .score {
+                text-align: center;
+                color: #80bd01;
+                flex: 1;
+            }
+        }
+
+    }
+    .user-active {
+        .active-content {
+            display: -webkit-flex;
+            display: flex;
+            padding: 10px;
+            border-bottom: 1px solid #f0f0f0;
+            .head {
+                img {
+                    width: 40px;
+                    height: 40px;
+                    margin-right: 15px;
+                    border-radius: 50%;
+                    border: 2px solid #fff6e6;
+                }
+            }
+            .right {
+                flex: 1;
+                overflow: hidden;
+                .tpoic-title {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    display: block;
+                    font-weight: 700;
+                    font-size: 1.8rem;
+                    color: #333;
+                }
+                .topic-bottom {
+                    display: -webkit-flex;
+                    display: flex;
+                    margin-top: 5px;
+                    .name {
+                        color: #626262;
+                        flex: 1;
+                    }
+                    .time {
+                        color: #80bd01;
+                        font-size: 1.2rem;
+                    }
+                }
+            }
+        }
+        .no-data {
+            height: -webkit-calc(~'100vh - 270px');
+            height: calc(~'100vh - 270px');
+        }
+    }
+}

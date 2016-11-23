@@ -58,3 +58,9 @@ export const addTopic = (data) => {
         body: data
     })
 }
+
+export const getUserInfo = (loginname) => {
+    return fetchApi({
+        url: `v1/user/${loginname}`
+    })
+}

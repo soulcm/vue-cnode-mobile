@@ -18,6 +18,12 @@
 * es6 es7
 * less 不用sass的理由你懂的，那个难安装
 
+项目还在持续更新中，以后计划：
+1. 优化css
+2. 优化router
+3. 优化vuex
+4. 加入transition效果
+
 
 运行步骤
 ```
