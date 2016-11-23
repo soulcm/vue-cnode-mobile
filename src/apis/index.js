@@ -53,7 +53,7 @@ const fetchApi = (cfg) => {
         delete opts.body;
     }
 
-    // fetchUrl = 'https://cnodejs.org' + fetchUrl;
+    fetchUrl = 'https://cnodejs.org' + fetchUrl;
 
 
     return new Promise((resolve, reject) => {
