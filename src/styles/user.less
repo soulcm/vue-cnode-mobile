@@ -35,7 +35,7 @@
         .active-content {
             display: -webkit-flex;
             display: flex;
-            padding: 5px 10px;
+            padding: 10px;
             border-bottom: 1px solid #f0f0f0;
             .head {
                 img {
@@ -54,8 +54,28 @@
                     text-overflow: ellipsis;
                     white-space: nowrap;
                     display: block;
+                    font-weight: 700;
+                    font-size: 1.8rem;
+                    color: #333;
+                }
+                .topic-bottom {
+                    display: -webkit-flex;
+                    display: flex;
+                    margin-top: 5px;
+                    .name {
+                        color: #626262;
+                        flex: 1;
+                    }
+                    .time {
+                        color: #80bd01;
+                        font-size: 1.2rem;
+                    }
                 }
             }
+        }
+        .no-data {
+            height: -webkit-calc(~'100vh - 270px');
+            height: calc(~'100vh - 270px');
         }
     }
 }

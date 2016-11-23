@@ -24,24 +24,31 @@
                     <router-link class="right" :to="{name:'topic',params:{id:item.id}}">
                         <span class="tpoic-title">{{item.title}}</span>
                         <span class="topic-bottom">
-
+                            <span class="name" v-text="item.author.loginname"></span>
+                            <span class="time">{{item.last_reply_at | getTimeInfo}}</span>
                         </span>
                     </router-link>
-
-
+                </div>
+                <div class="no-data" v-show="noData">
+                    <i class="iconfont icon-empty"></i>
+                    暂无数据!
                 </div>
             </div>
         </section>
+        <nv-top></nv-top>
+        <nv-load :show="showLoad"></nv-load>
     </div>
 </template>
 
 <script>
-    import {mapState} from 'vuex';
+    import {mapState, mapMutations} from 'vuex';
     import nvHead from '../components/header';
     import nvLoad from '../components/loading';
+    import nvTop from '../components/backTop';
     import '../styles/user';
     import {getTimeInfo} from '../utils/index';
     import {getUserInfo} from '../apis/publicApi';
+    import {TOOGLE_LOAD} from '../constants/mutationTypes';
     export default {
 
         data() {
@@ -54,28 +61,38 @@
         },
 
         mounted() {
-            const loginname = this.$route.params.loginname;
-            getUserInfo(loginname).then((res) => {
-                if (res.success) {
-                    this.user = res.data;
-                    if (res.data.recent_replies.length) {
-                        this.currentData = res.data.recent_replies;
-                    } else {
-                        this.currentData = res.data.recent_topics;
-                        this.activeItem = 2;
-                    }
-                    this.noData = this.currentData.length === 0;
-                } else {
-                    this.noData = true;
-                }
-            })
+            this.handleGetInfo();
         },
 
         methods: {
+            ...mapMutations([TOOGLE_LOAD]),
+
             handleTabChange(index) {
                 this.activeItem = index;
                 this.currentData = index === 1 ? this.user.recent_replies : this.user.recent_topics;
                 this.noData = this.currentData.length === 0;
+            },
+
+            handleGetInfo() {
+                const loginname = this.$route.params.loginname;
+                this[TOOGLE_LOAD](true);
+                getUserInfo(loginname).then((res) => {
+                    this[TOOGLE_LOAD](false);
+                    if (res.success) {
+                        this.user = res.data;
+                        if (res.data.recent_replies.length) {
+                            this.currentData = res.data.recent_replies;
+                        } else {
+                            this.currentData = res.data.recent_topics;
+                            this.activeItem = 2;
+                        }
+                        this.noData = this.currentData.length === 0;
+                    } else {
+                        this.noData = true;
+                    }
+                }).catch((err) => {
+                    this[TOOGLE_LOAD](false);
+                })
             }
         },
 
@@ -92,12 +109,21 @@
         },
 
         computed: {
+            ...mapState(['showLoad'])
+        },
 
+        watch: {
+            '$route' (to, from) {
+                if (to.params.loginname !== from.params.loginname) {
+                    this.handleGetInfo();
+                }
+            }
         },
 
         components:{
             nvHead,
-            nvLoad
+            nvLoad,
+            nvTop
         },
     }
 </script>
