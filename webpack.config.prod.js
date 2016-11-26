@@ -17,7 +17,9 @@ baseWebpackConfig.plugins = baseWebpackConfig.plugins.concat([
         },
         output: {comments: false},
     }),
-    new webpack.optimize.CommonsChunkPlugin('vendor', 'lib/vendor.[chunkhash].js'),
+    new webpack.optimize.CommonsChunkPlugin({
+        names: ['vendor', 'manifest']
+    }),
     new ExtractTextPlugin('lib/[name].[contenthash].css', {allChunks: true}),
     new HtmlWebpackPlugin({
         title: 'vue-cnode',
