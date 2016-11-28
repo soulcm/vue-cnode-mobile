@@ -17,14 +17,16 @@ baseWebpackConfig.plugins = baseWebpackConfig.plugins.concat([
         },
         output: {comments: false},
     }),
-    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.[chunkhash:8].js'),
+    new webpack.optimize.CommonsChunkPlugin({
+        names: ['vendor', 'manifest'],
+    }),
     new ExtractTextPlugin('[name].[contenthash:8].css', {allChunks: true}),
     new HtmlWebpackPlugin({
         title: 'vue-cnode',
         template: 'template/index.html',
         inject: true,
         filename: 'index.html',
-        chunks: ['vendor', 'app']
+        chunks: ['manifest', 'vendor', 'app']
     })
 ]);
 
