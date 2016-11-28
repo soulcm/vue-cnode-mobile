@@ -26,7 +26,7 @@ baseWebpackConfig.plugins = baseWebpackConfig.plugins.concat([
         template: 'template/index.html',
         inject: true,
         filename: 'index.html',
-        chunks: ['vendor', 'app']
+        chunks: ['manifest' ,'vendor', 'app']
     })
 ]);
 
