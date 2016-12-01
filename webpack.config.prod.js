@@ -4,6 +4,7 @@ var baseWebpackConfig = require('./webpack.config.base.js');
 var merge = require('webpack-merge');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
 
 baseWebpackConfig.plugins = baseWebpackConfig.plugins.concat([
     new webpack.DefinePlugin({
@@ -26,7 +27,10 @@ baseWebpackConfig.plugins = baseWebpackConfig.plugins.concat([
         template: 'template/index.html',
         inject: true,
         filename: 'index.html',
-        chunks: ['manifest', 'vendor', 'app']
+        chunks: ['vendor', 'app']
+    }),
+    new InlineManifestWebpackPlugin({
+        name: 'webpackManifest'
     })
 ]);
 
