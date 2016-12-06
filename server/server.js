@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
 const app = express();
+const routes = require('../routes/index.js');
 const port = process.env.PORT || 8080;
 const env = process.env.NODE_ENV || 'development';
 app.set('env', env);
@@ -54,6 +55,7 @@ if (env === 'development') {
     app.use(express.static(path.join(__dirname, '../dist')));
     app.use(express.static(path.join(__dirname, '../public')));
 
+    app.use(routes);
 
     app.use((req, res, next) => {
         res.sendFile(path.join(__dirname, '../dist', 'index.html'));
