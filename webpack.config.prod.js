@@ -38,6 +38,7 @@ module.exports = merge(baseWebpackConfig, {
     output: {
         path: path.join(__dirname, 'dist'),
         filename: 'lib/[name].[chunkhash:8].js',
+        publicPath: '/',
         chunkFilename: 'lib/[id].build.[chunkhash:8].js'
     }
 })

@@ -3,10 +3,11 @@ var webpack = require('webpack');
 var baseWebpackConfig = require('./webpack.config.base.js');
 var merge = require('webpack-merge');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 // add hot-reload related code to entry chunks
 Object.keys(baseWebpackConfig.entry).forEach(function (name) {
-    baseWebpackConfig.entry[name] = ['webpack-dev-server/client?http://127.0.0.1:8091', 'webpack/hot/dev-server'].concat(baseWebpackConfig.entry[name]);
+    baseWebpackConfig.entry[name] = ['webpack-hot-middleware/client'].concat(baseWebpackConfig.entry[name]);
 })
 
 baseWebpackConfig.plugins.push(
@@ -15,19 +16,27 @@ baseWebpackConfig.plugins.push(
             NODE_ENV: JSON.stringify('development')
         }
     }),
-    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
-    new ExtractTextPlugin('[name].css', {allChunks: true}),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'vendor.js'}),
+    new ExtractTextPlugin({filename: '[name].css',allChunks: true}),
+    new webpack.HotModuleReplacementPlugin(),
+    new HtmlWebpackPlugin({
+        title: 'vue-cnode',
+        template: 'template/index.html',
+        inject: true,
+        filename: 'index.html',
+        chunks: ['vendor', 'app']
+    })/*,
+    new webpack.LoaderOptionsPlugin({
+        debug: true
+    })*/
 );
 
 module.exports = merge(baseWebpackConfig, {
-    devtool: '#source-map',
-    debug: true,
+    devtool: '#eval-source-map',
     output: {
         path: path.join(__dirname, 'dist'),
         filename: '[name].js',
-        publicPath: '/dist/',
+        publicPath: '/',
         chunkFilename: '[id].build.js'
     }
 })
