@@ -21,7 +21,7 @@ baseWebpackConfig.plugins = baseWebpackConfig.plugins.concat([
     new webpack.optimize.CommonsChunkPlugin({
         names: ['vendor', 'manifest']
     }),
-    new ExtractTextPlugin('lib/[name].[contenthash].css', {allChunks: true}),
+    new ExtractTextPlugin({filename: 'lib/[name].[contenthash:8].css', allChunks: true}),
     new HtmlWebpackPlugin({
         title: 'vue-cnode',
         template: 'template/index.html',
@@ -37,7 +37,7 @@ baseWebpackConfig.plugins = baseWebpackConfig.plugins.concat([
 module.exports = merge(baseWebpackConfig, {
     output: {
         path: path.join(__dirname, 'dist'),
-        filename: 'lib/[name].[chunkhash].js',
-        chunkFilename: 'lib/[id].build.[chunkhash].js'
+        filename: 'lib/[name].[chunkhash:8].js',
+        chunkFilename: 'lib/[id].build.[chunkhash:8].js'
     }
 })
