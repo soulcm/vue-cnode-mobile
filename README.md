@@ -7,7 +7,7 @@
 
 你可以将代码down下来，然后本地运行，绝对能打开
 
-此版本停止更新，现正在进行重构，开发2.0版本[V2.0](https://github.com/soulcm/vue-cnode-mobile/blob/master/V2.0.md)，查看请切换到[V2.0分支](https://github.com/soulcm/vue-cnode-mobile/tree/V2.0)
+此版本停止更新，现正在进行重构，开发2.0版本[V2.0](https://github.com/soulcm/vue-cnode-mobile/blob/V2.0/README.md)，查看请切换到[V2.0分支](https://github.com/soulcm/vue-cnode-mobile/tree/V2.0)
 
 
 知识点：
