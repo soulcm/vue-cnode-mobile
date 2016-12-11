@@ -114,10 +114,12 @@
         },
 
         beforeRouteEnter(to, from, next) {
-            if (from.name !== 'topic' || (to.query.tab || 'all') !== sessionStorage.getItem('tab')) {
-                sessionStorage.removeItem('scrollTop');
-                sessionStorage.removeItem('searchOption');
-                sessionStorage.removeItem('tab');
+            if (typeof sessionStorage !== 'undefined') {
+                if (from.name !== 'topic' || (to.query.tab || 'all') !== sessionStorage.getItem('tab')) {
+                    sessionStorage.removeItem('scrollTop');
+                    sessionStorage.removeItem('searchOption');
+                    sessionStorage.removeItem('tab');
+                }
             }
             next();
         },

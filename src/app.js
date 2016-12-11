@@ -40,7 +40,7 @@ const router = new VueRouter({
 });
 
 // 处理刷新的时候vuex被清空但是用户已经登录的情况
-if (localStorage.getItem('userInfo')) {
+if (typeof localStorage !== 'undefined' && localStorage.getItem('userInfo')) {
     store.commit('LOGIN', JSON.parse(localStorage.getItem('userInfo')));
 }
 
