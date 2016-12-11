@@ -103,6 +103,8 @@
             }
             if (sessionStorage.getItem('tab') && sessionStorage.getItem('tab') === (this.$route.query.tab || 'all')) {
                 this.searchOption = JSON.parse(sessionStorage.getItem('searchOption'));
+            } else if (window.__INITIAL_STATE__) { //服务端渲染
+                delete window.__INITIAL_STATE__;
             } else {
                 this.getTopics();
             }

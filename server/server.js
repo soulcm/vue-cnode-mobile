@@ -48,7 +48,7 @@ if (env === 'development') {
     indexHTML = parseIndex(fs.readFileSync(path.join(__dirname, '../dist/index.html'), 'utf-8'))
 }
 
-app.use(express.static(path.join(__dirname, '../dist')));
+app.use('/lib',express.static(path.join(__dirname, '../dist/lib')));
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.use((req, res, next) => {
@@ -66,7 +66,8 @@ app.use((req, res, next) => {
             console.log(err)
             res.status(500).end('Internal Error 500')
         }
-        res.end(indexHTML.head + html + indexHTML.tail)
+        res.end(`${indexHTML.head}${html}<script>window.__INITIAL_STATE__=${
+          JSON.stringify(context.initialState)}</script>${indexHTML.tail}`)
     })
 })
 

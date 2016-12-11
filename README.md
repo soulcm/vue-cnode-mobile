@@ -24,15 +24,23 @@
 5. 引入服务端渲染？
 6. ...
 
+对跟路径/和/list路径支持服务端渲染，其他路径仍然走客户端渲染
 
 运行步骤
 ```
 npm install
 
-npm run dev
+npm run dev //development
 ```
 
-访问 http://127.0.0.1:8091
+访问 http://127.0.0.1:8888
+
+```
+npm run build
+
+npm run prod //production
+```
+访问 http://127.0.0.1:8888
 
 服务启动后，手机端可访问本机ip查看
 

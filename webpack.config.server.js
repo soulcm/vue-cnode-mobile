@@ -10,7 +10,7 @@ module.exports = {
     output: {
         path: path.join(__dirname, 'dist'),
         filename: 'server-bundle.js',
-        publicPath: '/',
+        publicPath: '/lib/',
         libraryTarget: 'commonjs2'
     },
     module: {

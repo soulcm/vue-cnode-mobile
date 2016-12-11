@@ -10,10 +10,8 @@ const serverConfig = require('../webpack.config.server.js')
 module.exports = function(app, opts) {
     const clientCompiler = webpack(clientConfig)
     const devMiddleware = webpackDevMiddleware(clientCompiler, {
-        contentBase: path.join(__dirname),
         publicPath: clientConfig.output.publicPath,
         noInfo: true,
-        serverSideRender: true,
         stats: {
             colors: true,
             chunks: false

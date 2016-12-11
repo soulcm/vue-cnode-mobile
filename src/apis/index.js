@@ -66,7 +66,7 @@ const fetchApi = (cfg) => {
                 throw res
             }
         }).catch((err) => {
-            reject();
+            reject(err);
         })
     })
 }
