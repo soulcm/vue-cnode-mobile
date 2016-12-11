@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 
 import routes from './configs/routes';
 import store from './vuex/index';
+import App from './App.vue';
 
 import Index from './views/index';
 import './styles/main.less';
@@ -59,7 +60,10 @@ router.beforeEach((to, from, next) => {
     }
 });
 
-new Vue({
+const app = new Vue({
     router,
-    store
-}).$mount('#app');
+    store,
+    render: h => h(App)
+});
+
+export {app, router, store}

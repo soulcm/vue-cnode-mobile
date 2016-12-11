@@ -31,9 +31,11 @@
     "express": "^4.14.0",
     "github-markdown-css": "^2.4.1",
     "isomorphic-fetch": "^2.2.1",
+    "json-loader": "^0.5.4",
     "serve-favicon": "^2.3.2",
     "vue": "^2.0.5",
     "vue-router": "^2.0.1",
+    "vue-server-renderer": "^2.1.4",
     "vuex": "^2.0.0"
   },
   "devDependencies": {

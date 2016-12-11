@@ -6,7 +6,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     entry: {
-        app: path.join(entryPath, 'app.js'),
+        app: path.join(entryPath, 'client-entry.js'),
         vendor: ['vue', 'vuex', 'vue-router']
     },
 
@@ -33,10 +33,7 @@ module.exports = {
     },
 
     resolve: {
-        extensions: ['.js', '.vue', '.css', '.less'],
-        alias: {
-            'vue$': 'vue/dist/vue.min.js'
-        }
+        extensions: ['.js', '.vue', '.css', '.less']
     },
 
     plugins: [

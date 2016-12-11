@@ -32,7 +32,7 @@ baseWebpackConfig.plugins.push(
 );
 
 module.exports = merge(baseWebpackConfig, {
-    devtool: '#eval-source-map',
+    devtool: '#inline-source-map',
     output: {
         path: path.join(__dirname, 'dist'),
         filename: '[name].js',
