@@ -16,11 +16,16 @@
     import nvHead from '../components/header';
     import '../styles/login.less';
     import {LOGIN} from '../constants/mutationTypes';
+    import Indicator from '../lib/indicator/index';
     export default {
         data() {
             return {
                 token: ''
             }
+        },
+
+        mounted() {
+            Indicator.close();
         },
 
         methods: {

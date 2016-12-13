@@ -13,7 +13,8 @@ Object.keys(baseWebpackConfig.entry).forEach(function (name) {
 baseWebpackConfig.plugins.push(
     new webpack.DefinePlugin({
         'process.env': {
-            NODE_ENV: JSON.stringify('development')
+            NODE_ENV: JSON.stringify('development'),
+            VUE_ENV: JSON.stringify('client')
         }
     }),
     new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'vendor.js'}),

@@ -9,7 +9,8 @@ var InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
 baseWebpackConfig.plugins = baseWebpackConfig.plugins.concat([
     new webpack.DefinePlugin({
         'process.env': {
-            NODE_ENV: JSON.stringify('production')
+            NODE_ENV: JSON.stringify('production'),
+            VUE_ENV: JSON.stringify('client')
         }
     }),
     new webpack.optimize.UglifyJsPlugin({

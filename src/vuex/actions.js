@@ -1,7 +1,6 @@
 import * as types from '../constants/mutationTypes'
 import {reply} from '../apis/publicApi';
 
-
 export const replyTopic = ({commit, dispatch}, data) => {
     const topicId = data.topicId;
     delete data.topicId;

@@ -1,5 +1,7 @@
 import {topicList, topicInfo} from '../../apis/publicApi';
 import * as types from '../../constants/mutationTypes';
+import Indicator from '../../lib/indicator/index';
+import Vue from 'vue';
 
 const state = {
     topics: [],
@@ -27,10 +29,8 @@ const mutations = {
 
 const actions = {
     [types.GET_TOPIC_LIST]({commit}, data) {
-        commit(types.TOOGLE_LOAD, true);
         return topicList(data).then((res) => {
             if (res.success) {
-                commit(types.TOOGLE_LOAD, false);
                 commit(types.GET_TOPIC_LIST, res.data);
                 return res
             }
@@ -38,22 +38,17 @@ const actions = {
     },
 
     [types.UPDATE_TOPIC_LIST]({commit}, data) {
-        commit(types.TOOGLE_LIST_LOAD, true);
-
         return topicList(data).then((res) => {
             if (res.success) {
-                commit(types.TOOGLE_LIST_LOAD, false);
                 commit(types.UPDATE_TOPIC_LIST, res.data)
             }
         })
     },
 
     [types.GET_TOPIC_INFO]({commit}, data) {
-        commit(types.TOOGLE_LOAD, true);
-        topicInfo(data).then((res) => {
+        return topicInfo(data).then((res) => {
             if (res.success) {
-                commit(types.TOOGLE_LOAD, false);
-                commit(types.GET_TOPIC_INFO, res.data)
+                commit(types.GET_TOPIC_INFO, res.data);
             }
         })
     },

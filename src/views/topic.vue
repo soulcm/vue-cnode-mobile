@@ -67,7 +67,6 @@
                 :topic-id="topicId"></nv-reply>
         </div>
         <nv-top></nv-top>
-        <nv-load :show="showLoad"></nv-load>
     </div>
 </template>
 
@@ -82,6 +81,7 @@
     import {topicTab} from '../constants/topicInfo';
     import {upReply} from '../apis/publicApi';
     import store from '../vuex/index';
+    import Indicator from '../lib/indicator/index';
     export default {
         data() {
             return {
@@ -97,7 +97,9 @@
 
         methods: {
             getTopicInfo() {
-                this.$store.dispatch(GET_TOPIC_INFO, this.topicId);
+                this.$store.dispatch(GET_TOPIC_INFO, this.topicId).then(() => {
+                    Indicator.close();
+                }).catch(() => Indicator.close());
             },
 
             getTabInfo(item) {

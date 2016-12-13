@@ -36,7 +36,6 @@
             </div>
         </section>
         <nv-top></nv-top>
-        <nv-load :show="showLoad"></nv-load>
     </div>
 </template>
 
@@ -48,7 +47,7 @@
     import '../styles/user';
     import {getTimeInfo} from '../utils/index';
     import {getUserInfo} from '../apis/publicApi';
-    import {TOOGLE_LOAD} from '../constants/mutationTypes';
+    import Indicator from '../lib/indicator/index';
     export default {
 
         data() {
@@ -65,8 +64,6 @@
         },
 
         methods: {
-            ...mapMutations([TOOGLE_LOAD]),
-
             handleTabChange(index) {
                 this.activeItem = index;
                 this.currentData = index === 1 ? this.user.recent_replies : this.user.recent_topics;
@@ -75,9 +72,8 @@
 
             handleGetInfo() {
                 const loginname = this.$route.params.loginname;
-                this[TOOGLE_LOAD](true);
+                Indicator.open('加载中...')
                 getUserInfo(loginname).then((res) => {
-                    this[TOOGLE_LOAD](false);
                     if (res.success) {
                         this.user = res.data;
                         if (res.data.recent_replies.length) {
@@ -90,8 +86,9 @@
                     } else {
                         this.noData = true;
                     }
+                    Indicator.close();
                 }).catch((err) => {
-                    this[TOOGLE_LOAD](false);
+                    Indicator.close();
                 })
             }
         },

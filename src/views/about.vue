@@ -7,7 +7,12 @@
 
 <script>
     import nvHead from '../components/header';
+    import Indicator from '../lib/indicator/index';
     export default {
+        mounted() {
+            Indicator.close();
+        },
+
         components:{
             nvHead
         },
