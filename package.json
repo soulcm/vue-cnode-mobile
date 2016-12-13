@@ -10,7 +10,7 @@
     "build": "npm run clean && npm run build:client && npm run build:server",
     "build:client": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js --progress --colors",
     "build:server": "cross-env NODE_ENV=production webpack --config webpack.config.server.js --progress --colors",
-    "clean": "rimraf dist/*"
+    "clean": "rimraf lib/*"
   },
   "repository": {
     "type": "git",
