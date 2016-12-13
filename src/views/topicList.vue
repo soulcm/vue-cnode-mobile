@@ -35,7 +35,6 @@
             </div>
         </div>
         <nv-top></nv-top>
-        <nv-load :show="showLoad"></nv-load>
     </div>
 </template>
 
@@ -75,7 +74,7 @@
 </style>
 
 <script>
-    import { mapState } from 'vuex';
+    import { mapGetters } from 'vuex';
     import '../styles/topic';
     import nvHead from '../components/header';
     import nvTop from '../components/backTop';
@@ -83,6 +82,7 @@
     import {GET_TOPIC_LIST, UPDATE_TOPIC_LIST} from '../constants/mutationTypes';
     import {topicTab} from '../constants/topicInfo';
     import {getTimeInfo} from '../utils/index';
+    import Indicator from '../lib/indicator/index';
 
     export default {
         data() {
@@ -93,6 +93,7 @@
                     tab: 'all',
                     mdrender: false
                 },
+                showListLoad: false,
                 scrollDelay: false
             }
         },
@@ -101,8 +102,16 @@
             if (this.$route.query && this.$route.query.tab) {
                 this.searchOption.tab = this.$route.query.tab;
             }
+
             if (sessionStorage.getItem('tab') && sessionStorage.getItem('tab') === (this.$route.query.tab || 'all')) {
                 this.searchOption = JSON.parse(sessionStorage.getItem('searchOption'));
+                Indicator.close()
+            } else if (window.__INITIAL_STATE__) { //服务端渲染
+                delete window.__INITIAL_STATE__;
+                Indicator.close();
+                if (localStorage.getItem('userInfo')) {
+                    this.$store.commit('LOGIN', JSON.parse(localStorage.getItem('userInfo')));
+                }
             } else {
                 this.getTopics();
             }
@@ -114,10 +123,12 @@
         },
 
         beforeRouteEnter(to, from, next) {
-            if (from.name !== 'topic' || (to.query.tab || 'all') !== sessionStorage.getItem('tab')) {
-                sessionStorage.removeItem('scrollTop');
-                sessionStorage.removeItem('searchOption');
-                sessionStorage.removeItem('tab');
+            if (typeof sessionStorage !== 'undefined') {
+                if (from.name !== 'topic' || (to.query.tab || 'all') !== sessionStorage.getItem('tab')) {
+                    sessionStorage.removeItem('scrollTop');
+                    sessionStorage.removeItem('searchOption');
+                    sessionStorage.removeItem('tab');
+                }
             }
             next();
         },
@@ -136,7 +147,9 @@
 
         methods: {
             getTopics() {
-                this.$store.dispatch(GET_TOPIC_LIST, this.searchOption);
+                this.$store.dispatch(GET_TOPIC_LIST, this.searchOption).then(() => {
+                    Indicator.close();
+                }).catch(() => Indicator.close());
             },
 
             getTabInfo(item) {
@@ -156,8 +169,13 @@
                 if (dom.length && (dom[dom.length - 1].offsetTop + dom[dom.length - 1].offsetHeight <= y + documentH) && !this.scrollDelay) {
                     this.searchOption.page = this.searchOption.page + 1;
                     this.scrollDelay = true;
+                    this.showListLoad = true;
                     this.$store.dispatch(UPDATE_TOPIC_LIST, this.searchOption).then(() => {
                         this.scrollDelay = false;
+                        this.showListLoad = false;
+                    }).catch(() => {
+                        this.scrollDelay = false;
+                        this.showListLoad = false;
                     });
                 }
             }
@@ -170,7 +188,7 @@
         },
 
         computed: {
-            ...mapState(['topics', 'showLoad', 'showListLoad']),
+            ...mapGetters(['topics']),
             pageTitle() {
                 const tab = (this.$route.query && this.$route.query.tab) || 'all';
                 return topicTab[tab];

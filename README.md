@@ -1,38 +1,46 @@
 # vue-cnode-mobile
-学习vue，搭建cnode社区，以前有搭过[react-cnode-mobile](https://github.com/soulcm/react-cnode-mobile)，但只有一个大的壳子就阉割了，因为很多react坑都已经踩过，就没往下继续了
-
-现在学习vue和移动端新知识，重新搭建cnode
 
 线上地址: [vue-cnode-mobile](https://soulcm.github.io/vue-cnode-mobile/)，当然能不能打开，真的是看脸的
 
-
-你可以将代码down下来，然后本地运行，绝对能打开
-
+重构vue-cnode-mobile，doing中，按以下知识点进行
 
 知识点：
 * vue2
 * vuex2
 * vue-router2
+* webpack2
+* 服务端渲染
 * 移动端开发
 * fetch
 * es6 es7
 * less 不用sass的理由你懂的，那个难安装
 
-项目还在持续更新中，以后计划：
-1. 优化css
-2. 优化router
-3. 优化vuex
+优化项：
+1. 优化css结构
+2. 优化router结构
+3. 优化vuex结构
 4. 加入transition效果
+5. 优化webpack打包
+5. 引入服务端渲染？
+6. ...
 
+对跟路径/和/list路径支持服务端渲染，其他路径仍然走客户端渲染
 
 运行步骤
 ```
 npm install
 
-npm run dev
+npm run dev //development
 ```
 
-访问 http://127.0.0.1:8091
+访问 http://127.0.0.1:8888
+
+```
+npm run build
+
+npm run prod //production
+```
+访问 http://127.0.0.1:8888
 
 服务启动后，手机端可访问本机ip查看
 

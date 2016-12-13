@@ -25,10 +25,11 @@
 </template>
 
 <script>
-    import {mapState} from 'vuex';
+    import {mapGetters} from 'vuex';
     import nvHead from '../components/header';
     import '../styles/create.less';
     import {addTopic} from '../apis/publicApi';
+    import Indicator from '../lib/indicator/index';
     export default {
         data() {
             return {
@@ -38,6 +39,10 @@
                     content: ''
                 }
             }
+        },
+
+        mounted() {
+            Indicator.close();
         },
 
         methods: {
@@ -68,7 +73,7 @@
         },
 
         computed: {
-            ...mapState(['userInfo'])
+            ...mapGetters(['userInfo'])
         },
 
         components:{

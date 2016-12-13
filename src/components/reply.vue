@@ -12,8 +12,7 @@
 </template>
 
 <script>
-    import { mapState } from 'vuex';
-    import { REPLY } from '../constants/mutationTypes';
+    import { mapGetters } from 'vuex';
     export default {
         data() {
             return {
@@ -37,7 +36,7 @@
                     reply_id: this.replyId,
                     topicId: this.topicId
                 }
-                this.$store.dispatch(REPLY, data).then(() => {
+                this.$store.dispatch('replyTopic', data).then(() => {
                     this.content = '';
                     this.$emit('onReply')
                 })
@@ -45,7 +44,7 @@
         },
 
         computed: {
-            ...mapState(['userInfo'])
+            ...mapGetters(['userInfo'])
         },
     }
 </script>

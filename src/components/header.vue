@@ -26,7 +26,7 @@
 
 <script>
     import '../styles/header';
-    import nvMenu from './menu'
+    import nvMenu from './menu';
 
     export default {
         data() {

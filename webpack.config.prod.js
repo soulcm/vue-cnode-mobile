@@ -9,7 +9,8 @@ var InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
 baseWebpackConfig.plugins = baseWebpackConfig.plugins.concat([
     new webpack.DefinePlugin({
         'process.env': {
-            NODE_ENV: JSON.stringify('production')
+            NODE_ENV: JSON.stringify('production'),
+            VUE_ENV: JSON.stringify('client')
         }
     }),
     new webpack.optimize.UglifyJsPlugin({
@@ -21,12 +22,12 @@ baseWebpackConfig.plugins = baseWebpackConfig.plugins.concat([
     new webpack.optimize.CommonsChunkPlugin({
         names: ['vendor', 'manifest'],
     }),
-    new ExtractTextPlugin('[name].[contenthash:8].css', {allChunks: true}),
+    new ExtractTextPlugin({filename: '[name].[contenthash:8].css', allChunks: true}),
     new HtmlWebpackPlugin({
         title: 'vue-cnode',
         template: 'template/index.html',
         inject: true,
-        filename: 'index.html',
+        filename: '../index.html',
         chunks: ['vendor', 'app']
     }),
     new InlineManifestWebpackPlugin({

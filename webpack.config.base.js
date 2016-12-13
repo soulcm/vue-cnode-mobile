@@ -6,25 +6,26 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     entry: {
-        app: path.join(entryPath, 'app.js'),
-        vendor: ['vue', 'vuex', 'vue-router']
+        app: path.join(entryPath, 'client-entry.js'),
+        vendor: ['vue', 'vuex', 'vue-router', 'es6-promise', 'github-markdown-css', 'isomorphic-fetch']
     },
 
     module: {
-        loaders: [{
+        rules: [{
             test: /\.vue$/,
             exclude: /node_modules/,
-            loader: 'vue-loader'
+            use: [{loader: 'vue-loader'}]
         }, {
             test: /\.js$/,
             exclude: /node_modules|vue\/dist/,
-            loader: 'babel'
+            loader: 'babel-loader'
         }, {
             test: /\.(less|css)?$/,
-            loader: ExtractTextPlugin.extract(['css', 'less'])
+            loader: ExtractTextPlugin.extract(['css-loader', 'less-loader'])
         }, {
             test: /\.(png|jpg)$/,
-			loader: 'url?limit=25000'
+			loader: 'url-loader',
+            options: {limit: 25000}
         }, {
             test: /\.(svg|ttf|eot|svg|woff(\(?2\)?)?)(\?[a-zA-Z_0-9.=&]*)?(#[a-zA-Z_0-9.=&]*)?$/,
             loader: "file-loader"
@@ -32,10 +33,7 @@ module.exports = {
     },
 
     resolve: {
-        extensions: ['', '.js', '.vue', '.css', '.less'],
-        alias: {
-            'vue$': 'vue/dist/vue.js'
-        }
+        extensions: ['.js', '.vue', '.css', '.less']
     },
 
     plugins: [

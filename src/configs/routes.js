@@ -7,6 +7,8 @@ import TopicList from '../views/topicList';
 // import Message from '../views/message';
 // import About from '../views/about';
 
+import Indicator from '../lib/indicator/index';
+
 const Topic = resolve => {
     require.ensure(['../views/topic.vue'], () => {
         resolve(require('../views/topic.vue'));

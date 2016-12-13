@@ -34,18 +34,17 @@
                 暂无数据!
             </div>
         </section>
-        <nv-load :show="showLoad"></nv-load>
     </div>
 </template>
 
 <script>
-    import { mapState, mapMutations } from 'vuex'
+    import { mapGetters, mapMutations } from 'vuex'
     import nvHead from '../components/header';
     import nvLoad from '../components/loading';
     import '../styles/message';
     import { messages } from '../apis/publicApi';
     import {getTimeInfo} from '../utils/index';
-    import {TOOGLE_LOAD} from '../constants/mutationTypes';
+    import Indicator from '../lib/indicator/index';
     export default {
         data() {
             return {
@@ -58,9 +57,7 @@
 
         mounted() {
             if (this.userInfo.loginname) {
-                this[TOOGLE_LOAD](true);
                 messages({accesstoken: this.userInfo.accesstoken}).then((res) => {
-                    this[TOOGLE_LOAD](false);
                     if (res.success) {
                         this.messagesData = res.data;
                         if (res.data.hasnot_read_messages.length) {
@@ -73,14 +70,14 @@
                     } else {
                         this.noData = true;
                     }
+                    Indicator.close();
                 }).catch((err)=> {
-                    this[TOOGLE_LOAD](false);
+                    Indicator.close()
                 })
             }
         },
 
         methods: {
-            ...mapMutations([TOOGLE_LOAD]),
             handleTabChange(index) {
                 this.activeItem = index;
                 this.currentData = index === 1 ? this.messagesData.has_read_messages : this.messagesData.hasnot_read_messages;
@@ -95,7 +92,7 @@
         },
 
         computed: {
-            ...mapState(['userInfo', 'showLoad'])
+            ...mapGetters(['userInfo'])
         },
 
         components:{

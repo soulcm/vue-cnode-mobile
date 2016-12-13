@@ -3,11 +3,12 @@ import VueRouter from 'vue-router';
 
 import routes from './configs/routes';
 import store from './vuex/index';
+import App from './App.vue';
 
 import Index from './views/index';
 import './styles/main.less';
 import 'github-markdown-css'; //markdown css
-// import './styles/iconfont/iconfont.css';
+import Indicator from './lib/indicator/index';
 
 // 注册一个全局自定义指令 v-focus
 Vue.directive('focus', {
@@ -39,14 +40,17 @@ const router = new VueRouter({
 });
 
 // 处理刷新的时候vuex被清空但是用户已经登录的情况
-if (localStorage.getItem('userInfo')) {
+if (typeof localStorage !== 'undefined' && localStorage.getItem('userInfo')) {
     store.commit('LOGIN', JSON.parse(localStorage.getItem('userInfo')));
 }
 
 // 登录验证
 router.beforeEach((to, from, next) => {
+    if (process.env.VUE_ENV === 'client') {
+        Indicator.open('加载中...')
+    }
     if (to.matched.some(record => record.meta.requiresAuth)) {
-        if (store.state.userInfo.loginname) { //已登录
+        if (store.getters.userInfo.loginname) { //已登录
             next();
         } else { //未登录
             next({
@@ -59,7 +63,10 @@ router.beforeEach((to, from, next) => {
     }
 });
 
-new Vue({
+const app = new Vue({
     router,
-    store
-}).$mount('#app');
+    store,
+    render: h => h(App)
+});
+
+export {app, router, store}
