@@ -1,5 +1,5 @@
-require('es6-promise/auto');
-require('isomorphic-fetch');
+import 'es6-promise/auto';
+import 'isomorphic-fetch';
 
 const baseOpts = {
     method: 'get',
@@ -55,6 +55,9 @@ const fetchApi = (cfg) => {
 
     // fetchUrl = 'https://cnodejs.org' + fetchUrl;
 
+    if(process.env.VUE_ENV === 'server') { //服务端fetch需要绝对地址
+        fetchUrl = 'https://cnodejs.org' + fetchUrl
+    }
 
     return new Promise((resolve, reject) => {
         fetch(fetchUrl, opts).then((res) => {
