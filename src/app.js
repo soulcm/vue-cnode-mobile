@@ -47,7 +47,7 @@ if (typeof localStorage !== 'undefined' && localStorage.getItem('userInfo')) {
 // 登录验证
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth)) {
-        if (store.state.userInfo.loginname) { //已登录
+        if (store.getters.userInfo.loginname) { //已登录
             next();
         } else { //未登录
             next({

@@ -11,7 +11,7 @@
 </template>
 
 <script>
-    import {mapState} from 'vuex';
+    import {mapGetters} from 'vuex';
 
     import nvHead from '../components/header';
     import '../styles/login.less';
@@ -36,7 +36,7 @@
         },
 
         computed: {
-            ...mapState(['userInfo'])
+            ...mapGetters(['userInfo'])
         },
 
         components:{

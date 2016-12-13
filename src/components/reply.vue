@@ -12,7 +12,7 @@
 </template>
 
 <script>
-    import { mapState } from 'vuex';
+    import { mapGetters } from 'vuex';
     import { REPLY } from '../constants/mutationTypes';
     export default {
         data() {
@@ -45,7 +45,7 @@
         },
 
         computed: {
-            ...mapState(['userInfo'])
+            ...mapGetters(['userInfo'])
         },
     }
 </script>

@@ -72,7 +72,7 @@
 </template>
 
 <script>
-    import { mapState } from 'vuex';
+    import { mapGetters } from 'vuex';
     import nvHead from '../components/header';
     import nvReply from '../components/reply';
     import nvTop from '../components/backTop';
@@ -164,7 +164,7 @@
         },
 
         computed: {
-            ...mapState(['topicInfo', 'userInfo', 'showLoad'])
+            ...mapGetters(['topicInfo', 'userInfo', 'showLoad'])
         },
 
         components: {

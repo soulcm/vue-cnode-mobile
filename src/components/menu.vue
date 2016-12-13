@@ -40,7 +40,7 @@
 </style>
 
 <script>
-    import {mapState} from 'vuex';
+    import {mapState, mapGetters} from 'vuex';
     import '../styles/menu.less';
     import UserInfo from './userInfo';
     import { messageCount } from '../apis/publicApi';
@@ -72,7 +72,7 @@
         },
 
         computed: {
-            ...mapState(['userInfo'])
+            ...mapGetters(['userInfo'])
         },
 
         components: {

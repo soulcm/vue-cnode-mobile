@@ -43,7 +43,7 @@
 </style>
 
 <script>
-    import {mapState} from 'vuex';
+    import {mapGetters} from 'vuex';
     import {LOGIN_OUT} from '../constants/mutationTypes';
 
     export default {
@@ -55,7 +55,7 @@
         },
 
         computed: {
-            ...mapState(['userInfo']),
+            ...mapGetters(['userInfo']),
         },
     }
 </script>

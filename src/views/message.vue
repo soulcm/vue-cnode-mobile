@@ -39,7 +39,7 @@
 </template>
 
 <script>
-    import { mapState, mapMutations } from 'vuex'
+    import { mapGetters, mapMutations } from 'vuex'
     import nvHead from '../components/header';
     import nvLoad from '../components/loading';
     import '../styles/message';
@@ -95,7 +95,7 @@
         },
 
         computed: {
-            ...mapState(['userInfo', 'showLoad'])
+            ...mapGetters(['userInfo', 'showLoad'])
         },
 
         components:{

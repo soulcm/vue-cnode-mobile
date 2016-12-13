@@ -41,7 +41,7 @@
 </template>
 
 <script>
-    import {mapState, mapMutations} from 'vuex';
+    import {mapGetters, mapMutations} from 'vuex';
     import nvHead from '../components/header';
     import nvLoad from '../components/loading';
     import nvTop from '../components/backTop';
@@ -109,7 +109,7 @@
         },
 
         computed: {
-            ...mapState(['showLoad'])
+            ...mapGetters(['showLoad'])
         },
 
         watch: {

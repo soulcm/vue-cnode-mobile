@@ -75,7 +75,7 @@
 </style>
 
 <script>
-    import { mapState } from 'vuex';
+    import { mapGetters } from 'vuex';
     import '../styles/topic';
     import nvHead from '../components/header';
     import nvTop from '../components/backTop';
@@ -174,7 +174,7 @@
         },
 
         computed: {
-            ...mapState(['topics', 'showLoad', 'showListLoad']),
+            ...mapGetters(['topics', 'showLoad', 'showListLoad']),
             pageTitle() {
                 const tab = (this.$route.query && this.$route.query.tab) || 'all';
                 return topicTab[tab];
