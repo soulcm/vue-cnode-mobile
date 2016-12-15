@@ -7,7 +7,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
     entry: {
         app: path.join(entryPath, 'client-entry.js'),
-        vendor: ['vue', 'vuex', 'vue-router', 'es6-promise', 'github-markdown-css', 'isomorphic-fetch']
+        vendor: ['vue', 'vuex', 'vue-router', 'es6-promise', 'isomorphic-fetch', 'fastclick']
     },
 
     module: {
