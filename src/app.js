@@ -26,6 +26,7 @@ Vue.use(VueRouter);
 const router = new VueRouter({
     mode: 'history',
     routes,
+    base: '/vue-cnode-mobile/',
     scrollBehavior(to, from, savedPosition) {
         // if (to.name === 'list' && from.name === 'topic') {
         //     return {x: 0, y: +sessionStorage.getItem('scrollTop') || 0}

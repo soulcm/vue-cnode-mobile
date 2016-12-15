@@ -46,36 +46,36 @@ const About = resolve => {
 };
 
 const routes = [{
-    path: '/vue-cnode-mobile',
+    path: '/',
     redirect: {name: 'list'}
 }, {
-    path: '/vue-cnode-mobile/list',
+    path: '/list',
     name: 'list',
     component: TopicList
 }, {
-    path: '/vue-cnode-mobile/topic/:id',
+    path: '/topic/:id',
     name: 'topic',
     component: Topic
 }, {
-    path: '/vue-cnode-mobile/create',
+    path: '/create',
     name: 'create',
     component: NewTopic,
     meta: { requiresAuth: true }
 }, {
-    path: '/vue-cnode-mobile/login',
+    path: '/login',
     name: 'login',
     component: Login
 }, {
-    path: '/vue-cnode-mobile/user/:loginname',
+    path: '/user/:loginname',
     name: 'user',
     component: User
 }, {
-    path: '/vue-cnode-mobile/message',
+    path: '/message',
     name: 'message',
     component: Message,
     meta: { requiresAuth: true }
 }, {
-    path: '/vue-cnode-mobile/about',
+    path: '/about',
     name: 'about',
     component: About
 }]
