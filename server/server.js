@@ -5,6 +5,7 @@ const favicon = require('serve-favicon');
 const app = express();
 const routes = require('../routes/index.js');
 const port = process.env.PORT || 8080;
+const serialize = require('serialize-javascript')
 const env = process.env.NODE_ENV || 'development';
 app.set('env', env);
 
@@ -66,8 +67,9 @@ app.use((req, res, next) => {
             console.log(err)
             res.status(500).end('Internal Error 500')
         }
+
         res.end(`${indexHTML.head}${html}<script>window.__INITIAL_STATE__=${
-          JSON.stringify(context.initialState)}</script>${indexHTML.tail}`)
+          serialize(context.initialState, {isJSON: true})}</script>${indexHTML.tail}`)
     })
 })
 
