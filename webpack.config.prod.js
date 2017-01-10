@@ -18,6 +18,7 @@ baseWebpackConfig.plugins = baseWebpackConfig.plugins.concat([
             warnings: false
         },
         output: {comments: false},
+        sourceMap: true
     }),
     new webpack.optimize.CommonsChunkPlugin({
         names: ['vendor', 'manifest']
@@ -32,6 +33,13 @@ baseWebpackConfig.plugins = baseWebpackConfig.plugins.concat([
     }),
     new InlineManifestWebpackPlugin({
         name: 'webpackManifest'
+    }),
+    new webpack.LoaderOptionsPlugin({
+        minimize: true
+    }),
+    new webpack.EvalSourceMapDevToolPlugin({
+        // module: false,
+        // // columns: false
     })
 ]);
 
@@ -41,5 +49,6 @@ module.exports = merge(baseWebpackConfig, {
         filename: '[name].[chunkhash:8].js',
         publicPath: '/lib/',
         chunkFilename: '[id].build.[chunkhash:8].js'
-    }
+    },
+    // devtool: 'cheap-module-source-map'
 })

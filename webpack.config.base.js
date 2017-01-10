@@ -21,7 +21,7 @@ module.exports = {
             loader: 'babel-loader'
         }, {
             test: /\.(less|css)?$/,
-            loader: ExtractTextPlugin.extract(['css-loader', 'less-loader'])
+            loader: ExtractTextPlugin.extract(['css-loader?sourceMap', 'less-loader?sourceMap'])
         }, {
             test: /\.(png|jpg)$/,
 			loader: 'url-loader',

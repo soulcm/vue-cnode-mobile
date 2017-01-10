@@ -26,14 +26,14 @@ baseWebpackConfig.plugins.push(
         inject: true,
         filename: 'index.html',
         chunks: ['vendor', 'app']
-    })/*,
+    }),
     new webpack.LoaderOptionsPlugin({
         debug: true
-    })*/
+    })
 );
 
 module.exports = merge(baseWebpackConfig, {
-    devtool: '#inline-source-map',
+    devtool: 'inline-source-map',
     output: {
         path: path.join(__dirname, 'dist'),
         filename: '[name].js',
