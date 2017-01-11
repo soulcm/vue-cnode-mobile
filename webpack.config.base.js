@@ -2,12 +2,12 @@ var path = require('path');
 var webpack = require('webpack');
 var entryPath = path.join(__dirname, 'src');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var isProd = process.env.NODE_ENV === 'production';
 
 
 module.exports = {
     entry: {
-        app: path.join(entryPath, 'client-entry.js'),
-        vendor: ['vue', 'vuex', 'vue-router', 'es6-promise', 'isomorphic-fetch', 'fastclick']
+        app: path.join(entryPath, 'client-entry.js')
     },
 
     module: {
