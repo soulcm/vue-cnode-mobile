@@ -19,7 +19,7 @@ baseWebpackConfig.plugins = baseWebpackConfig.plugins.concat([
             warnings: false
         },
         output: {comments: false},
-        // sourceMap: true
+        sourceMap: true
     }),
     new ExtractTextPlugin({filename: '[name].[contenthash:8].css', allChunks: true}),
     new HtmlWebpackPlugin({
@@ -32,17 +32,13 @@ baseWebpackConfig.plugins = baseWebpackConfig.plugins.concat([
     new webpack.LoaderOptionsPlugin({
         minimize: true
     }),
-    /*new webpack.EvalSourceMapDevToolPlugin({
-        // module: false,
-        // // columns: false
-    }),*/
     new webpack.DllReferencePlugin({
       context: __dirname,
       manifest: require('./dll/manifest.json'),
     }),
     new AddAssetHtmlPlugin({
         filepath: path.resolve(__dirname, 'dll', assetsConfig.lib.js),
-        includeSourcemap: false
+        includeSourcemap: true
     })
 ]);
 
@@ -53,5 +49,5 @@ module.exports = merge(baseWebpackConfig, {
         publicPath: '/lib/',
         chunkFilename: '[id].build.[chunkhash:8].js'
     },
-    // devtool: 'cheap-module-source-map'
+    devtool: 'source-map'
 })

@@ -38,7 +38,7 @@ if (isProd) {
                 warnings: false
             },
             output: {comments: false},
-            // sourceMap: true
+            sourceMap: true
         })
     )
 }
@@ -59,7 +59,7 @@ module.exports = {
         library: '[name]'
     },
 
-    devtool: isProd ? false : 'inline-source-map',
+    devtool: isProd ? 'source-map' : 'inline-source-map',
 
     plugins: plugin
 }
