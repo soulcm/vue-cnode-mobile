@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "cross-env NODE_ENV=development PORT=8888 nodemon ./server/server.js --ignore src/",
     "prod": "cross-env NODE_ENV=production PORT=8080 nodemon ./server/server.js --ignore src/",
-    "build": "npm run clean && npm run build:client && npm run build:server",
+    "build": "npm run clean && npm run build:dll && npm run build:client && npm run build:server",
     "build:client": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js --progress --colors --hide-modules",
     "build:server": "cross-env NODE_ENV=production webpack --config webpack.config.server.js --progress --colors --hide-modules",
     "build:dll": "npm run clean:dll && cross-env NODE_ENV=production webpack --config webpack.config.dll.js --progress --colors",
