@@ -4,6 +4,8 @@ var baseWebpackConfig = require('./webpack.config.base.js');
 var merge = require('webpack-merge');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
+var assetsConfig = require('./dll/assets.json');
 
 // add hot-reload related code to entry chunks
 Object.keys(baseWebpackConfig.entry).forEach(function (name) {
@@ -17,7 +19,6 @@ baseWebpackConfig.plugins.push(
             VUE_ENV: JSON.stringify('client')
         }
     }),
-    new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'vendor.js'}),
     new ExtractTextPlugin({filename: '[name].css',allChunks: true}),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
@@ -25,15 +26,23 @@ baseWebpackConfig.plugins.push(
         template: 'template/index.html',
         inject: true,
         filename: 'index.html',
-        chunks: ['vendor', 'app']
-    })/*,
+        chunks: ['app']
+    }),
     new webpack.LoaderOptionsPlugin({
         debug: true
-    })*/
+    }),
+    new webpack.DllReferencePlugin({
+      context: __dirname,
+      manifest: require('./dll/manifest.json'),
+    }),
+    new AddAssetHtmlPlugin({
+        filepath: path.resolve(__dirname, 'dll', assetsConfig.lib.js),
+        includeSourcemap: false
+    })
 );
 
 module.exports = merge(baseWebpackConfig, {
-    devtool: '#inline-source-map',
+    devtool: 'inline-source-map',
     output: {
         path: path.join(__dirname, 'dist'),
         filename: '[name].js',

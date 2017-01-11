@@ -4,7 +4,8 @@ var baseWebpackConfig = require('./webpack.config.base.js');
 var merge = require('webpack-merge');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
+var AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
+var assetsConfig = require('./dll/assets.json');
 
 baseWebpackConfig.plugins = baseWebpackConfig.plugins.concat([
     new webpack.DefinePlugin({
@@ -18,9 +19,7 @@ baseWebpackConfig.plugins = baseWebpackConfig.plugins.concat([
             warnings: false
         },
         output: {comments: false},
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-        names: ['vendor', 'manifest']
+        sourceMap: true
     }),
     new ExtractTextPlugin({filename: '[name].[contenthash:8].css', allChunks: true}),
     new HtmlWebpackPlugin({
@@ -28,10 +27,18 @@ baseWebpackConfig.plugins = baseWebpackConfig.plugins.concat([
         template: 'template/index.html',
         inject: true,
         filename: '../index.html',
-        chunks: ['vendor', 'app']
+        chunks: ['app']
     }),
-    new InlineManifestWebpackPlugin({
-        name: 'webpackManifest'
+    new webpack.LoaderOptionsPlugin({
+        minimize: true
+    }),
+    new webpack.DllReferencePlugin({
+      context: __dirname,
+      manifest: require('./dll/manifest.json'),
+    }),
+    new AddAssetHtmlPlugin({
+        filepath: path.resolve(__dirname, 'dll', assetsConfig.lib.js),
+        includeSourcemap: true
     })
 ]);
 
@@ -41,5 +48,6 @@ module.exports = merge(baseWebpackConfig, {
         filename: '[name].[chunkhash:8].js',
         publicPath: '/lib/',
         chunkFilename: '[id].build.[chunkhash:8].js'
-    }
+    },
+    devtool: 'source-map'
 })

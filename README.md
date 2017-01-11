@@ -27,18 +27,23 @@
 对跟路径/和/list路径支持服务端渲染，其他路径仍然走客户端渲染
 
 运行步骤
+
 ```
+//development
 npm install
 
-npm run dev //development
+npm run build:dll-dev
+
+npm run dev
 ```
 
 访问 http://127.0.0.1:8888
 
 ```
+//production
 npm run build
 
-npm run prod //production
+npm run prod
 ```
 访问 http://127.0.0.1:8888
 
