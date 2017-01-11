@@ -8,9 +8,12 @@
     "dev": "cross-env NODE_ENV=development PORT=8888 nodemon ./server/server.js --ignore src/",
     "prod": "cross-env NODE_ENV=production PORT=8080 nodemon ./server/server.js --ignore src/",
     "build": "npm run clean && npm run build:client && npm run build:server",
-    "build:client": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js --progress --colors",
-    "build:server": "cross-env NODE_ENV=production webpack --config webpack.config.server.js --progress --colors",
-    "clean": "rimraf dist/*"
+    "build:client": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js --progress --colors --hide-modules",
+    "build:server": "cross-env NODE_ENV=production webpack --config webpack.config.server.js --progress --colors --hide-modules",
+    "build:dll": "npm run clean:dll && cross-env NODE_ENV=production webpack --config webpack.config.dll.js --progress --colors",
+    "build:dll-dev": "npm run clean:dll && cross-env NODE_ENV=development webpack --config webpack.config.dll.js --progress --colors",
+    "clean": "rimraf dist/*",
+    "clean:dll": "rimraf dll/*"
   },
   "repository": {
     "type": "git",
@@ -43,6 +46,8 @@
     "vuex": "^2.0.0"
   },
   "devDependencies": {
+    "add-asset-html-webpack-plugin": "^1.0.2",
+    "assets-webpack-plugin": "^3.5.0",
     "babel-core": "^6.18.2",
     "babel-loader": "^6.2.7",
     "babel-plugin-transform-runtime": "^6.15.0",
