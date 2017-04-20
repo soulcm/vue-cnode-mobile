@@ -30,6 +30,8 @@
 
 ```
 //development
+npm i -g nodemon
+
 npm install
 
 npm run build:dll-dev
